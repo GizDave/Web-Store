@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,4 +23,6 @@ public class Address {
     private String zipcode;
     @Column
     private String country;
+    @OneToMany(mappedBy = "address")
+    private Set<CustomerAddressBridge> customerAddressBridgeSet;
 }

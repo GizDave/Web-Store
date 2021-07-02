@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,4 +23,6 @@ public class Option {
     @ManyToOne
     @JoinColumn(name = "stockid")
     private Stock stock;
+    @OneToMany(mappedBy = "option")
+    private Set<ProductOptionBridge> productOptionBridgeSet;
 }

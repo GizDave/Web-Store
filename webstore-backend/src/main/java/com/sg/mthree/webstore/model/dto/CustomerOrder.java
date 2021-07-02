@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,4 +33,6 @@ public class CustomerOrder {
     @ManyToOne
     @JoinColumn(name = "customerid")
     private Customer customer;
+    @OneToMany(mappedBy = "customerOrder")
+    private Set<CustomerOrderProductBridge> customerOrderProductBridgeSet;
 }

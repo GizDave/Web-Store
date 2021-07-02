@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,4 +24,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;
+    @OneToMany(mappedBy = "product")
+    private Set<CustomerOrderProductBridge> customerOrderProductBridgeSet;
+    @OneToMany(mappedBy = "product")
+    private Set<ProductOptionBridge> productOptionBridgeSet;
 }
