@@ -1,5 +1,8 @@
-package com.sg.mthree.webstore.model.dao;
+package main.java.com.sg.mthree.webstore.model.dao;
 
-public interface CustomerPaymentRepository extends JpaRepository<CustomerPayment,Integer>{
+import main.java.com.sg.mthree.webstore.model.dto.CustomerPayment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerPaymentRepository extends JpaRepository<CustomerPayment,Integer> {
 
 }
