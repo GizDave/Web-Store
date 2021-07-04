@@ -1,3 +1,7 @@
 
 webstore-backend/src/main/resources/application.properties
 *.xml
+.idea/workspace.xml
+webstore-backend/src/main/resources/application.properties
+webstore-backend/src/main/resources/application.properties
+webstoredb.sql
