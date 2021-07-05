@@ -52,9 +52,9 @@ public class ProductList {
     @GetMapping("/get/displayOrder")
     public String getDisplayOrder(){return displayOrder;}
     @GetMapping("/get/availableItemCounts")
-    public int[] getItemCountOption(){return itemCountOption;}
+    public List<Integer> getItemCountOption(){return itemCountOption;}
     @GetMapping("/get/availableDisplayOrders")
-    public String[] getDisplayOrderOption(){return displayOrderOption;}
+    public List<String> getDisplayOrderOption(){return displayOrderOption;}
     @GetMapping("/get/categories")
     public List<String> getCategories(){return categoryDB.findAllName();}
 
@@ -115,10 +115,9 @@ public class ProductList {
         }
     }
 
-    @GetMapping("/search/{query}")
-    public List<Product> search(@RequestParam String query){
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> search(@RequestParam String query){
         pageNumber = 0;
-        return productDB.findByName(query, pageNumber, itemCount, displayOrder);
     }
 
     private void refreshCategoryOption(){

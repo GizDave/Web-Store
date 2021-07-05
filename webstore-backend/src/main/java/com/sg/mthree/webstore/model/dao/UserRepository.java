@@ -10,4 +10,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query("SELECT u.isadmin FROM User u WHERE u.userid = ?1")
     boolean isAdmin(int userId);
+
+    @Query("SELECT COUNT(u.id)>0 FROM User u")
+    boolean existsByUsername(String username);
 }
