@@ -15,7 +15,7 @@ public class MainPage {
     @Autowired
     private ProductRepository productDB;
 
-    @GetMapping
+    @GetMapping("/featuredProducts")
     public List<Product> getFeaturedProducts(){
         return productDB.findByPopularity(5);
     }
