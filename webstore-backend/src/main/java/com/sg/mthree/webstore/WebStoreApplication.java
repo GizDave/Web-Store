@@ -1,4 +1,4 @@
-package com.sg.mthree.webstore;
+package main.java.com.sg.mthree.webstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
