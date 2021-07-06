@@ -10,6 +10,9 @@
           <ProductCard/>
           <ProductCard/>
         </div>
+        <button class="flex flex-col px-2 py-3 font-semibold text-center text-white bg-yellow-400 rounded-lg text-md hover:bg-yellow-300">
+            <a href="/products/keyboards">View More Products</a>
+        </button>
       </div>
       <div class="flex flex-col items-center">
         <h2 class="pt-3">KEYCAPS</h2>

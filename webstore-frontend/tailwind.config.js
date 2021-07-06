@@ -6,8 +6,9 @@ module.exports = {
     extend: {},
   },
   variants: {
-    display: ['responsive', 'group-hover', 'group-focus'],
-    extend: {},
+    extend: {
+      display: ['responsive', 'group-hover', 'group-focus'],
+    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),

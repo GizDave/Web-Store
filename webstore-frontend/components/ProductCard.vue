@@ -1,26 +1,11 @@
 <template>
-  <!-- <div>
-      <div class="relative bg-white rounded-lg shadow">
-          <div>
-              <img
-                src="../static/images/placeholder.jpeg"
-                alt=""
-                class="object-cover rounded-lg h-80 w-80 md:w-100 md:h-100"
-                />
-          </div>
-            <div class="text-lg font-black text-center text-white bg-yellow-400 min-w-max">
-                <p>IN STOCK</p>
-            </div>
-
-      </div>
-  </div> -->
 <body class="font-sans antialiased">
   <div class="container items-center justify-center mx-auto">
-    <div class="flex flex-wrap w-full max-w-sm">
+    <div class="flex flex-wrap w-full max-w-sm group">
       <div class="w-full p-4">
-        <a href="" class="block overflow-hidden bg-white rounded-lg shadow-md c-card hover:shadow-xl">
+        <a href="" class="block overflow-hidden bg-white rounded-lg shadow-md">
         <div class="relative overflow-hidden aspect-h-2 aspect-w-3">
-          <img class="absolute inset-0 object-cover w-full h-full" src="../static/images/placeholder.jpeg" alt="">
+          <img class="absolute inset-0 object-cover w-full h-full group-hover:scale-110" src="../static/images/placeholder.jpeg" alt="">
         </div>
         <div>
           <p class="p-0 text-lg font-bold text-center text-white bg-yellow-400">Placeholder Stock Status</p>
