@@ -1,4 +1,4 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
 import main.java.com.sg.mthree.webstore.model.dao.CategoryRepository;
 import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
