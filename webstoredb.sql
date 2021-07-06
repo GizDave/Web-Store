@@ -12,36 +12,17 @@ create table Products (
     name			varchar(30),
     description		text,
     categoryid		int,
+    thumbnail 		text,
+    price			decimal(10,2),
     foreign key (categoryid) references Categories(categoryid)
-);
-
-create table Product_Variants (
-	variantid		int 			primary key			auto_increment,
-    name			varchar(30),
-    productid		int,
-    foreign key (productid) references Products(productid)
 );
 
 create table Stock (
 	stockid			int				primary key			auto_increment,
+    productid		int,
     instock			bool			default false,
-    quantity		int				default 0
-);
-
-create table Options (
-	optionid		int				primary key			auto_increment,
-    name			varchar(30),
-    price			decimal(10,2),
-    stockid			int,
-    foreign key (stockid) references Stock(stockid)
-);
-
-create table Product_Option_Bridge (
-	productid		int,
-    optionid		int,
-    primary key(productid, optionid),
-    foreign key (productid) references Products(productid),
-    foreign key (optionid) references Options(optionid)
+    quantity		int				default 0,
+    foreign key (productid) references Products(productid)
 );
 
 create table Users (
@@ -97,9 +78,7 @@ create table Customer_Orders (
     paymentmethodid	int,
     customerid		int,
     date_ordered	datetime,
-    date_paid		datetime,
     total_price		decimal(10,2),
-    order_status_code	int,
     foreign key (paymentmethodid) references Customer_Payments(paymentmethodid),
     foreign key (customerid) references Customers(customerid)
 );
