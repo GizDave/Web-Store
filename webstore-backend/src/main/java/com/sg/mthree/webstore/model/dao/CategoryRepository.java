@@ -1,6 +1,6 @@
 package com.sg.mthree.webstore.model.dao;
 
-import main.java.com.sg.mthree.webstore.model.dto.Category;
+import com.sg.mthree.webstore.model.dto.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.Query;
