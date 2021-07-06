@@ -14,19 +14,23 @@
 
       </div>
   </div> -->
-  <body class="p-6 font-sans antialiased">
-  <div class="container mx-auto">
-    <div class="flex flex-wrap -mx-4">
+<body class="font-sans antialiased">
+  <div class="container items-center justify-center mx-auto">
+    <div class="flex flex-wrap w-full max-w-sm">
       <div class="w-full p-4">
         <a href="" class="block overflow-hidden bg-white rounded-lg shadow-md c-card hover:shadow-xl">
-        <div class="relative pb-48 overflow-hidden">
+        <div class="relative overflow-hidden aspect-h-2 aspect-w-3">
           <img class="absolute inset-0 object-cover w-full h-full" src="../static/images/placeholder.jpeg" alt="">
         </div>
-        <div class="p-4">
-          <h3 class="mt-2 mb-2 font-bold">Placeholder Product</h3>
-          <div class="flex items-center mt-3">
-            <span class="text-xl font-bold">45,00</span>
+        <div>
+          <p class="p-0 text-lg font-bold text-center text-white bg-yellow-400">Placeholder Stock Status</p>
+        </div>
+        <div class="p-4 pt-0">
+          <div class="flex justify-between my-2">
+            <span class="text-xl font-bold">Placeholder Product</span>
+            <span class="text-lg font-bold text-yellow-400">$115</span>
           </div>
+          <p class="line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
       </a>
       </div>

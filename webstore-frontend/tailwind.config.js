@@ -9,5 +9,8 @@ module.exports = {
     display: ['responsive', 'group-hover', 'group-focus'],
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/aspect-ratio')
+  ],
 }
