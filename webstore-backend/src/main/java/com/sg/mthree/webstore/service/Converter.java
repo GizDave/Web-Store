@@ -1,15 +1,12 @@
 package main.java.com.sg.mthree.webstore.service;
 
-import main.java.com.sg.mthree.webstore.model.dao.ImageRepository;
-import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
-import main.java.com.sg.mthree.webstore.model.dao.StockRepository;
-import main.java.com.sg.mthree.webstore.model.dto.Image;
-import main.java.com.sg.mthree.webstore.model.dto.Product;
-import main.java.com.sg.mthree.webstore.model.dto.ProductSummary;
+import main.java.com.sg.mthree.webstore.model.dao.*;
+import main.java.com.sg.mthree.webstore.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Converter {
     @Autowired
@@ -20,6 +17,15 @@ public class Converter {
 
     @Autowired
     private StockRepository stockDB;
+
+    @Autowired
+    private CustomerRepository customerDB;
+
+    @Autowired
+    private CustomerAddressRepository customerAddressDB;
+
+    @Autowired
+    private CustomerPaymentRepository customerPaymentDB;
 
     public List<ProductSummary> productToThumbnail(List<Product> products){
         List<ProductSummary> buffer = new ArrayList<>();
@@ -38,5 +44,23 @@ public class Converter {
         }
 
         return buffer;
+    }
+
+    public CustomerPaymentSummary toCustomerPaymentSummary(int customerId){
+        Optional<Customer> c = customerDB.findById(customerId);
+
+        if(!c.isPresent()) {
+            return null;
+        }
+        else {
+            CustomerPaymentSummary cps = new CustomerPaymentSummary();
+            cps.setCustomerid(customerId);
+            cps.setFirst_name(c.get().getFirst_name());
+            cps.setLast_name(c.get().getLast_name());
+            cps.setPhone(c.get().getPhone());
+            cps.setAddress(customerAddressDB.findAddressByCustomerId(customerId));
+            cps.setPayment(customerPaymentDB.findByCustomerId(customerId));
+            return cps;
+        }
     }
 }

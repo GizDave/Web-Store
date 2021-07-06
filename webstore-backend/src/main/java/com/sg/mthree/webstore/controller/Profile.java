@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -39,8 +40,8 @@ public class Profile {
     }
 
     @GetMapping("/paymentinformation/{customerId}")
-    public ResponseEntity<CustomerPayment> getPaymentInformation(@RequestParam int customerId){
-        Optional<CustomerPayment> cp = Optional.ofNullable(customerPaymentDB.findByCustomerId(customerId));
+    public ResponseEntity<List<CustomerPayment>> getPaymentInformation(@RequestParam int customerId){
+        Optional<List<CustomerPayment>> cp = Optional.ofNullable(customerPaymentDB.findByCustomerId(customerId));
         if(!cp.isPresent()) {
             return ResponseEntity.badRequest()
                     .body(null);

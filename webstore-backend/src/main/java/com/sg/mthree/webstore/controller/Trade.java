@@ -4,9 +4,10 @@ import main.java.com.sg.mthree.webstore.model.dao.CustomerAddressRepository;
 import main.java.com.sg.mthree.webstore.model.dao.CustomerOrderRepository;
 import main.java.com.sg.mthree.webstore.model.dao.CustomerPaymentRepository;
 import main.java.com.sg.mthree.webstore.model.dao.CustomerRepository;
-import main.java.com.sg.mthree.webstore.model.dto.Customer;
 import main.java.com.sg.mthree.webstore.model.dto.CustomerOrder;
 import main.java.com.sg.mthree.webstore.model.dto.CustomerPayment;
+import main.java.com.sg.mthree.webstore.model.dto.CustomerPaymentSummary;
+import main.java.com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,11 +43,27 @@ public class Trade {
         }
     }
 
+    private Converter convert;
+
+    public Trade() {
+        convert = new Converter();
+    }
+
     @GetMapping("/detail")
-    public ResponseEntity<CustomerPayment>
+    public ResponseEntity<CustomerPaymentSummary> prefillPaymentMethod(int customerId){
+        CustomerPaymentSummary cps = convert.toCustomerPaymentSummary(customerId);
+        if(cps == null) {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(cps);
+        }
+    }
 
     @PostMapping("/placeorder")
-    public ResponseEntity<Integer> placeOrder(CustomerOrder order){
+    public ResponseEntity<Integer> placeOrder(CustomerPaymentSummary paymentInformation){
 
     }
 
