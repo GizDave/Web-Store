@@ -51,7 +51,7 @@ public class Profile {
         }
     }
 
-    @PutMapping("/securityinformation/{customerId}")
+    @GetMapping("/securityinformation/{customerId}")
     public ResponseEntity<User> getSecurityInformation(@RequestParam int customerId){
         Optional<Customer> c = customerDB.findById(customerId);
         if(!c.isPresent()){

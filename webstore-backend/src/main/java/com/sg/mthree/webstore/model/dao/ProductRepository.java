@@ -8,13 +8,15 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product,Integer> {
     // get popular products by number of units ordered (not the best metric)
-    @Query("SELECT p from Product p WHERE p.productid IN (SELECT productid FROM Customer_Order_Product_Bridge GROUP BY productid SORT BY SUM(quantity) DESC LIMIT ?1)")
+    @Query("SELECT p FROM Product p WHERE p.productid IN (SELECT productid FROM Customer_Order_Product_Bridge GROUP BY productid SORT BY SUM(quantity) DESC LIMIT ?1)")
     List<Product> findByPopularity(int num_product);
 
-    @Query("SELECT p from Product p WHERE p.name LIKE ?1% ORDER BY p.name ?4 OFFSET ?2*?3 LIMIT ?3")
-    List<Product> findByName(String name, int page_num, int num_product, String order);
+    @Query("SELECT p FROM Product p WHERE p.name LIKE ?1%")
+    List<Product> findByName(String query);
 
-    // pagination
-    @Query("SELECT p from Product p WHERE ?1 ORDER BY p.?1 ?4 ORDER BY p.name ?4 OFFSET ?2*?3 LIMIT ?3")
-    List<Product> getBatch(String filter, int page_num, int num_product, String order);
+    @Query("SELECT p FROM Product p WHERE p.categoryid = ?1")
+    List<Product> findByCategoryId(int categoryId);
+
+    @Query("SELECT COUNT(p) FROM Product p WHERE p.categoryid = ?1")
+    Integer countProductByCategory(int category_id);
 }
