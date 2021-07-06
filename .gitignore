@@ -8,3 +8,4 @@ webstoredb.sql
 .idea/workspace.xml
 *.xml
 .idea\
+application.properties
