@@ -7,23 +7,22 @@ create table Categories (
     name			varchar(30)
 );
 
-
-create table Stock (
-	stockid			int				primary key			auto_increment,
-    instock			bool			default false,
-    quantity		int				default 0
-);
-
 create table Products (
 	productid		int				primary key 		auto_increment,
     name			varchar(30),
     description		text,
     categoryid		int,
-    stockid			int,
     thumbnail 		text,
     price			decimal(10,2),
-    foreign key (categoryid) references Categories(categoryid),
-	foreign key (stockid) references Stock(stockid)
+    foreign key (categoryid) references Categories(categoryid)
+);
+
+create table Stock (
+	stockid			int				primary key			auto_increment,
+    productid		int,
+    instock			bool			default false,
+    quantity		int				default 0,
+    foreign key (productid) references Products(productid)
 );
 
 create table Users (
