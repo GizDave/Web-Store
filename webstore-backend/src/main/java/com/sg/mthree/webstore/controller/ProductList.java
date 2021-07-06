@@ -8,14 +8,12 @@ import main.java.com.sg.mthree.webstore.model.dto.Image;
 import main.java.com.sg.mthree.webstore.model.dto.Product;
 import main.java.com.sg.mthree.webstore.model.dto.Thumbnail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/productlist")
@@ -39,6 +37,7 @@ public class ProductList {
     private List<Category> categoryOption;
     private List<Integer> itemCountOption;
     private List<String> displayOrderOption;
+    private Map<String, Sort.Direction> displayOrderOptionMap;
 
     public ProductList(){
         Integer[] icOption = {10, 15, 20};
@@ -46,6 +45,10 @@ public class ProductList {
 
         String[] doOption = {"Ascending", "Descending", "None"};
         displayOrderOption = Arrays.asList(doOption);
+        displayOrderOptionMap = new HashMap<String, Sort.Direction>();
+        displayOrderOptionMap.put("Ascending", Sort.Direction.ASC);
+        displayOrderOptionMap.put("Descending", Sort.Direction.DESC);
+        displayOrderOptionMap.put("None", Sort.Direction.ASC); // default sort order
 
         categoryOption = categoryDB.findAll();
 
@@ -157,22 +160,46 @@ public class ProductList {
     }
 
     private void refreshBuffer(String query){
-        if(query != null && query.length() > 0) {
-            return;
+        buffer = new ArrayList<>();
+        List<Product> tempP = null;
+        List<Image> tempI = null;
+
+        if(query != null) {
+            if(query.length() > 0) {
+                tempP = productDB.findByName(
+                        query,
+                        Sort.by(displayOrderOptionMap.get(displayOrder), "name")
+                );
+            }
+            else {
+                return;
+            }
         }
         else {
-            ArrayList<Thumbnail> tb = new ArrayList<>();
-            List<Product> tempP = productDB.findByCategoryId(category.getCategoryid());
+            tempP = productDB.findByCategoryId(
+                    category.getCategoryid(),
+                    Sort.by(displayOrderOptionMap.get(displayOrder), "name")
+            );
+        }
 
-            for(Product p: tempP) {
+        for(Product p: tempP) {
+            Thumbnail tn = new Thumbnail();
+            tn.setProductid(p.getProductid());
+            tn.setName(p.getName());
+            tn.setDescription(p.getDescription());
 
+            tempI = imageDB.findByProductId(p.getProductid());
+            if(tempI.size() > 0){
+                tn.setImage_path(tempI.get(0).getImage_path()); // default to first image of the product
             }
+
+            buffer.add(tn);
         }
 
         totalCount = buffer.size();
     }
 
     private List<Thumbnail> refreshPage() {
-        return null;
+        return buffer.subList(pageNumber*itemCount, Math.min(buffer.size(), (pageNumber+1)*itemCount));
     }
 }

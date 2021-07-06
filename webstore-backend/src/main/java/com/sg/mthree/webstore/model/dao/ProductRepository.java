@@ -1,6 +1,7 @@
 package main.java.com.sg.mthree.webstore.model.dao;
 
 import main.java.com.sg.mthree.webstore.model.dto.Product;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,10 +13,10 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product> findByPopularity(int num_product);
 
     @Query("SELECT p FROM Product p WHERE p.name LIKE ?1%")
-    List<Product> findByName(String query);
+    List<Product> findByName(String query, Sort sort);
 
     @Query("SELECT p FROM Product p WHERE p.categoryid = ?1")
-    List<Product> findByCategoryId(int categoryId);
+    List<Product> findByCategoryId(int categoryId, Sort sort);
 
     @Query("SELECT COUNT(p) FROM Product p WHERE p.categoryid = ?1")
     Integer countProductByCategory(int category_id);
