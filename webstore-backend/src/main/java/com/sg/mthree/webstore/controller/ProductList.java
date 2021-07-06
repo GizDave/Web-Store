@@ -6,7 +6,8 @@ import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
 import main.java.com.sg.mthree.webstore.model.dto.Category;
 import main.java.com.sg.mthree.webstore.model.dto.Image;
 import main.java.com.sg.mthree.webstore.model.dto.Product;
-import main.java.com.sg.mthree.webstore.model.dto.Thumbnail;
+import main.java.com.sg.mthree.webstore.model.dto.ProductSummary;
+import main.java.com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -33,11 +34,13 @@ public class ProductList {
     private String displayOrder;
     private Category category;
 
-    private List<Thumbnail> buffer;
+    private List<ProductSummary> buffer;
     private List<Category> categoryOption;
     private List<Integer> itemCountOption;
     private List<String> displayOrderOption;
     private Map<String, Sort.Direction> displayOrderOptionMap;
+
+    private Converter convert;
 
     public ProductList(){
         Integer[] icOption = {10, 15, 20};
@@ -58,6 +61,8 @@ public class ProductList {
         displayOrder = displayOrderOption.get(2);
 
         refreshBuffer(null);
+
+        convert = new Converter();
     }
 
     @GetMapping("/pageNumber")
@@ -76,7 +81,7 @@ public class ProductList {
     public List<String> getCategories(){return categoryDB.findAllName();}
 
     @PutMapping("/pageNumber/{newPageNumber}")
-    public ResponseEntity<List<Thumbnail>> setPageNumber(@RequestParam int newPageNumber) {
+    public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
         if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
             this.pageNumber = pageNumber;
             return ResponseEntity.status(HttpStatus.OK)
@@ -88,7 +93,7 @@ public class ProductList {
         }
     }
     @PutMapping("/itemCount/{itemCountIndex}")
-    public ResponseEntity<List<Thumbnail>> setItemCount(@RequestParam int itemCountIndex) {
+    public ResponseEntity<List<ProductSummary>> setItemCount(@RequestParam int itemCountIndex) {
         if(itemCountIndex >= 0 && itemCountIndex < itemCountOption.size()) {
             this.itemCount = itemCountOption.get(itemCountIndex);
             return ResponseEntity.status(HttpStatus.OK)
@@ -100,7 +105,7 @@ public class ProductList {
         }
     }
     @PutMapping("/displayOrder/{displayOrderIndex}")
-    public ResponseEntity<List<Thumbnail>> setDisplayOrder(@RequestParam int displayOrderIndex){
+    public ResponseEntity<List<ProductSummary>> setDisplayOrder(@RequestParam int displayOrderIndex){
         if(displayOrderIndex >= 0 && displayOrderIndex < itemCountOption.size()) {
             this.displayOrder = displayOrderOption.get(displayOrderIndex);
             return ResponseEntity.status(HttpStatus.OK)
@@ -112,7 +117,7 @@ public class ProductList {
         }
     }
     @PutMapping("/categories/{categoryIndex}")
-    public ResponseEntity<List<Thumbnail>> setCategory(@RequestParam int categoryIndex) {
+    public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam int categoryIndex) {
         if(categoryIndex >= 0 && categoryIndex < itemCountOption.size()) {
             this.displayOrder = displayOrderOption.get(categoryIndex);
             refreshBuffer(null);
@@ -126,7 +131,7 @@ public class ProductList {
     }
 
     @GetMapping("/nextpage")
-    public ResponseEntity<List<Thumbnail>> nextPage() {
+    public ResponseEntity<List<ProductSummary>> nextPage() {
         if(itemCount * (pageNumber + 1) > totalCount) {
             pageNumber += 1;
             return ResponseEntity.status(HttpStatus.OK)
@@ -139,7 +144,7 @@ public class ProductList {
     }
 
     @GetMapping("/previouspage")
-    public ResponseEntity<List<Thumbnail>> prevPage() {
+    public ResponseEntity<List<ProductSummary>> prevPage() {
         if(pageNumber - 1 < 1){
             pageNumber -= 1;
             return ResponseEntity.status(HttpStatus.OK)
@@ -152,7 +157,7 @@ public class ProductList {
     }
 
     @GetMapping("/search/{query}")
-    public ResponseEntity<List<Thumbnail>> search(@RequestParam String query) {
+    public ResponseEntity<List<ProductSummary>> search(@RequestParam String query) {
         pageNumber = 0;
         refreshBuffer(query);
         return ResponseEntity.status(HttpStatus.OK)
@@ -182,24 +187,11 @@ public class ProductList {
             );
         }
 
-        for(Product p: tempP) {
-            Thumbnail tn = new Thumbnail();
-            tn.setProductid(p.getProductid());
-            tn.setName(p.getName());
-            tn.setDescription(p.getDescription());
-
-            tempI = imageDB.findByProductId(p.getProductid());
-            if(tempI.size() > 0){
-                tn.setImage_path(tempI.get(0).getImage_path()); // default to first image of the product
-            }
-
-            buffer.add(tn);
-        }
-
+        buffer = convert.productToThumbnail(tempP);
         totalCount = buffer.size();
     }
 
-    private List<Thumbnail> refreshPage() {
+    private List<ProductSummary> refreshPage() {
         return buffer.subList(pageNumber*itemCount, Math.min(buffer.size(), (pageNumber+1)*itemCount));
     }
 }

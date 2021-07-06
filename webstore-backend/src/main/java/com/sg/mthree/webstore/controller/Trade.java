@@ -42,8 +42,11 @@ public class Trade {
         }
     }
 
+    @GetMapping("/detail")
+    public ResponseEntity<CustomerPayment>
+
     @PostMapping("/placeorder")
-    public ResponseEntity<Integer> placeOrder(){
+    public ResponseEntity<Integer> placeOrder(CustomerOrder order){
 
     }
 

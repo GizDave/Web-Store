@@ -20,6 +20,12 @@ public class Product {
     private String description;
     @Column
     private int categoryid;
+    @Column
+    private int stockid;
+    @Column
+    private String thumbnail;
+    @Column
+    private float price;
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;

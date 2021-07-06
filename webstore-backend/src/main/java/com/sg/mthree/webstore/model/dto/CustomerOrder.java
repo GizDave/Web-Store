@@ -19,8 +19,6 @@ public class CustomerOrder {
     @Column
     private int customerid;
     @Column
-    private LocalDateTime date_ordered;
-    @Column
     private LocalDateTime date_paid;
     @Column
     private BigDecimal total_price;
