@@ -1,5 +1,6 @@
 package main.java.com.sg.mthree.webstore.controller;
 
+import main.java.com.sg.mthree.webstore.model.dao.CustomerRepository;
 import main.java.com.sg.mthree.webstore.model.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,9 @@ public class Signin {
     @Autowired
     private UserRepository userDB;
 
+    @Autowired
+    private CustomerRepository customerDB;
+
     @GetMapping
     public ResponseEntity<Integer> login(@RequestParam(name = "Username") String username,
                                          @RequestParam(name = "Password") String password) {
@@ -25,8 +29,9 @@ public class Signin {
                     .body(0);
         }
         else {
+            Integer customerId = customerDB.getCustomerIdByUserId(userId);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(userId);
+                    .body(customerId);
         }
     }
 }

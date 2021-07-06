@@ -1,12 +1,13 @@
 package main.java.com.sg.mthree.webstore.controller;
 
+import main.java.com.sg.mthree.webstore.model.dao.CustomerAddressRepository;
+import main.java.com.sg.mthree.webstore.model.dao.CustomerPaymentRepository;
 import main.java.com.sg.mthree.webstore.model.dao.CustomerRepository;
 import main.java.com.sg.mthree.webstore.model.dto.Customer;
+import main.java.com.sg.mthree.webstore.model.dto.CustomerPayment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -16,9 +17,32 @@ public class Trade {
     @Autowired
     private CustomerRepository customerDB;
 
+    @Autowired
+    private CustomerPaymentRepository customerPaymentDB;
+
+    @Autowired
+    private CustomerAddressRepository customerAddressDB;
+
+    private Customer customer;
+
     @GetMapping("/prefill")
-    public Optional<Customer> getCustomer(@RequestParam("CustomerId") int userId) {
+    public Optional<CustomerPayment> getCustomer(@RequestParam("CustomerId") int userId) {
         int customerId = customerDB.getCustomerIdByUserId(userId);
-        return customerDB.findById(customerId);
+        return customerPaymentDB.findById(customerId);
+    }
+
+    @PostMapping("/buy")
+    public ResponseEntity<String> addOrder(){
+
+    }
+
+    @PutMapping("/editorder")
+    public ResponseEntity<String> editOrder(){
+
+    }
+
+    @DeleteMapping("/deleteorder")
+    public ResponseEntity<String> deleteOrder(){
+
     }
 }

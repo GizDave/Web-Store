@@ -45,21 +45,21 @@ public class ProductList {
         displayOrder = displayOrderOption.get(2);
     }
 
-    @GetMapping("/get/pageNumber")
+    @GetMapping("/pageNumber")
     public int getPageNumber(){return pageNumber+1;}
-    @GetMapping("/get/itemCount")
+    @GetMapping("/itemCount")
     public int getItemCount(){return itemCount;}
-    @GetMapping("/get/displayOrder")
+    @GetMapping("/displayOrder")
     public String getDisplayOrder(){return displayOrder;}
-    @GetMapping("/get/availableItemCounts")
+    @GetMapping("/availableItemCounts")
     public List<Integer> getItemCountOption(){return itemCountOption;}
-    @GetMapping("/get/availableDisplayOrders")
+    @GetMapping("/availableDisplayOrders")
     public List<String> getDisplayOrderOption(){return displayOrderOption;}
-    @GetMapping("/get/categories")
+    @GetMapping("/categories")
     public List<String> getCategories(){return categoryDB.findAllName();}
 
-    @PutMapping("/set")
-    public ResponseEntity<String> setPageNumber(@RequestParam("pageNumber") int newPageNumber){
+    @PutMapping("/pageNumber/{newPageNumber}")
+    public ResponseEntity<String> setPageNumber(@RequestParam int newPageNumber){
         if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
             this.pageNumber = pageNumber;
         }
@@ -67,8 +67,8 @@ public class ProductList {
 
         }
     }
-    @PutMapping("/set")
-    public ResponseEntity<String> setItemCount(@RequestParam("itemCount") int itemCountIdex){
+    @PutMapping("/itemCount/{itemCountIndex}")
+    public ResponseEntity<String> setItemCount(@RequestParam int itemCountIndex){
         if() {
 
         }
@@ -76,8 +76,8 @@ public class ProductList {
 
         }
     }
-    @PutMapping("/set")
-    public ResponseEntity<String> setDisplayOrder(@RequestParam("displayOrder") int displayOrderIndex){
+    @PutMapping("/displayOrder/{displayOrderIndex}")
+    public ResponseEntity<String> setDisplayOrder(@RequestParam int displayOrderIndex){
         if() {
 
         }
@@ -85,8 +85,8 @@ public class ProductList {
 
         }
     }
-    @PutMapping("/set")
-    public ResponseEntity<String> setCategory(@RequestParam("category") int categoryIndex){
+    @PutMapping("/categories/{categoryIndex}")
+    public ResponseEntity<String> setCategory(@RequestParam int categoryIndex){
         if() {
 
         }
