@@ -1,5 +1,7 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
+import com.sg.mthree.webstore.model.dao.ProductRepository;
+import com.sg.mthree.webstore.model.dto.Product;
 import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
 import main.java.com.sg.mthree.webstore.model.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;

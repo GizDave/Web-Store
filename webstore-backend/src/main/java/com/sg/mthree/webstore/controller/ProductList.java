@@ -1,5 +1,8 @@
 package com.sg.mthree.webstore.controller;
 
+import com.sg.mthree.webstore.model.dao.CategoryRepository;
+import com.sg.mthree.webstore.model.dao.ProductRepository;
+import com.sg.mthree.webstore.model.dto.Category;
 import main.java.com.sg.mthree.webstore.model.dao.CategoryRepository;
 import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
 import main.java.com.sg.mthree.webstore.model.dto.Category;

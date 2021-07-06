@@ -1,4 +1,4 @@
-package main.java.com.sg.mthree.webstore.model.dao;
+package com.sg.mthree.webstore.model.dao;
 
 import main.java.com.sg.mthree.webstore.model.dto.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;

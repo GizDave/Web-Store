@@ -1,6 +1,6 @@
 package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.UserRepository;
+import com.sg.mthree.webstore.model.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
