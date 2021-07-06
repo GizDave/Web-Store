@@ -151,7 +151,7 @@ public class ProductList {
         }
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search/{query}")
     public ResponseEntity<List<Thumbnail>> search(@RequestParam String query) {
         pageNumber = 0;
         refreshBuffer(query);
