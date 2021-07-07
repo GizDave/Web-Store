@@ -34,7 +34,7 @@ public class Trade {
     private ProductRepository productDB;
 
     @GetMapping("/prefill/{userId}")
-    public ResponseEntity<CustomerPayment> getCustomer(@RequestParam("CustomerId") int userId) {
+    public ResponseEntity<CustomerPayment> getCustomer(@RequestParam("customerid") int userId) {
         Optional<Integer> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
         if(!customerId.isPresent()) {
             return ResponseEntity.badRequest()
@@ -52,7 +52,7 @@ public class Trade {
         convert = new Converter();
     }
 
-    @GetMapping("/detail/paymentmethod")
+    @GetMapping("/prefill/paymentmethod")
     public ResponseEntity<CustomerPaymentSummary> prefillPaymentMethod(int customerId){
         CustomerPaymentSummary cps = convert.toCustomerPaymentSummary(customerId);
         if(cps == null) {
@@ -65,10 +65,22 @@ public class Trade {
         }
     }
 
+    @GetMapping("/allorders")
+    public ResponseEntity<List<CustomerOrder>> findAllOrder(@RequestParam("customerid") int customerId) {
+        if(!customerDB.existsById(customerId)) {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(customerOrderDB.findAllByCustomerid(customerId));
+        }
+    }
+
     @PostMapping("/placeorder")
-    public ResponseEntity<String> placeOrder(@RequestParam("ProductId") int productId,
-                                              @RequestParam("Quantity") int quantity,
-                                              @RequestParam("PaymentMethodId") int paymentMethodId){
+    public ResponseEntity<String> placeOrder(@RequestParam("productids") int productId,
+                                              @RequestParam("quantity") int quantity,
+                                              @RequestParam("paymentmethodid") int paymentMethodId){
         if(!customerPaymentDB.existsById(paymentMethodId)) {
             return ResponseEntity.badRequest()
                     .body("Payment method does not exist.");

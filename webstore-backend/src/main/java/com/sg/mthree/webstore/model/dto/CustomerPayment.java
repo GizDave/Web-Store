@@ -7,12 +7,12 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Customer_Payments")
 public class CustomerPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int paymentmethodid;
-    @Column
+    @Column(insertable = false, updatable = false)
     private int customerid;
     @Column
     private String card_number;

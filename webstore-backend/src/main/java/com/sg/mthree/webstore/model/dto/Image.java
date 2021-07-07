@@ -7,12 +7,12 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Images")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int imageid;
-    @Column
+    @Column(insertable = false, updatable = false)
     private int productid;
     @Column
     private String image_path;

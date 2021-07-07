@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Customer_Orders")
 public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderid;
-    @Column
+    @Column(insertable = false, updatable = false)
     private int paymentmethodid;
-    @Column
+    @Column(insertable = false, updatable = false)
     private int customerid;
     @Column
     private LocalDateTime date_ordered;

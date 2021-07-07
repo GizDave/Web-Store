@@ -45,23 +45,23 @@ public class ProductList {
     public ProductList(){
         Integer[] icOption = {10, 15, 20};
         itemCountOption = Arrays.asList(icOption);
-
+        System.out.println("itemcountoption");
         String[] doOption = {"Ascending", "Descending", "None"};
         displayOrderOption = Arrays.asList(doOption);
         displayOrderOptionMap = new HashMap<String, Sort.Direction>();
         displayOrderOptionMap.put("Ascending", Sort.Direction.ASC);
         displayOrderOptionMap.put("Descending", Sort.Direction.DESC);
         displayOrderOptionMap.put("None", Sort.Direction.ASC); // default sort order
-
+        System.out.println("displayorderoptionmap");
         categoryOption = categoryDB.findAll();
-
+        System.out.println("categoryoption");
         pageNumber = 0;
         itemCount = itemCountOption.get(0);
         category = categoryOption.get(0);
         displayOrder = displayOrderOption.get(2);
-
+        System.out.println("basic stats");
         refreshBuffer(null);
-
+        System.out.println("refreshbuffer");
         convert = new Converter();
     }
 
@@ -78,7 +78,7 @@ public class ProductList {
     @GetMapping("/availableDisplayOrders")
     public List<String> getDisplayOrderOption(){return displayOrderOption;}
     @GetMapping("/categories")
-    public List<String> getCategories(){return categoryDB.findAllName();}
+    public List<Category> getCategories(){return categoryOption;}
 
     @PutMapping("/pageNumber/{newPageNumber}")
     public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
@@ -117,9 +117,10 @@ public class ProductList {
         }
     }
     @PutMapping("/categories/{categoryIndex}")
-    public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam int categoryIndex) {
-        if(categoryIndex >= 0 && categoryIndex < itemCountOption.size()) {
-            this.displayOrder = displayOrderOption.get(categoryIndex);
+    public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam String categoryName) {
+        Category temp = categoryDB.getCategoryByName(categoryName);
+        if(temp != null) {
+            this.category = temp;
             refreshBuffer(null);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());

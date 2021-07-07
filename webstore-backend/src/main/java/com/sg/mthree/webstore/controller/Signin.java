@@ -20,8 +20,8 @@ public class Signin {
     private CustomerRepository customerDB;
 
     @GetMapping
-    public ResponseEntity<Integer> login(@RequestParam(name = "Username") String username,
-                                         @RequestParam(name = "Password") String password) {
+    public ResponseEntity<Integer> login(@RequestParam(name = "username") String username,
+                                         @RequestParam(name = "password") String password) {
         Integer userId = userDB.login(username, password);
 
         if(userId == null) {

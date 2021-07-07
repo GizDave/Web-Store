@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode
-@Entity
+@Entity(name = "Products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Product {
     private String name;
     @Column
     private String description;
-    @Column
+    @Column(insertable = false, updatable = false)
     private int categoryid;
     @Column
     private String thumbnail;

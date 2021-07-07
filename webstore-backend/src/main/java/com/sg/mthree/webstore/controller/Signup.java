@@ -5,10 +5,9 @@ import main.java.com.sg.mthree.webstore.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/signup")
@@ -22,8 +21,8 @@ public class Signup {
     private final int max_password_len = 20;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> register(@RequestParam(name = "Username") String username,
-                                           @RequestParam(name = "Password") String password) {
+    public ResponseEntity<String> register(@RequestParam(name = "username") String username,
+                                           @RequestParam(name = "password") String password) {
         if(userDB.existsByUsername(username)) {
             return ResponseEntity.badRequest()
                     .body("Username already exists. Choose another one.");
@@ -48,6 +47,18 @@ public class Signup {
             userDB.save(u);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("User added.");
+        }
+    }
+
+    @GetMapping("/admin/getuserlist")
+    public ResponseEntity<List<User>> getUserList(@RequestParam("adminid") int userId) {
+        if(!userDB.isAdmin(userId)) {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(userDB.findAll());
         }
     }
 }
