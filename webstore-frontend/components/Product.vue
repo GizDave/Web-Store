@@ -43,7 +43,29 @@
 
 <script>
 export default {
-
+    name: "Store",
+    props: {
+        product:    {
+            type: Object,
+            default: null,
+        },
+    },
+  data() {
+    return {
+        cart: [],
+    };
+  },
+  methods: {
+    isInCart() {
+      return this.$store.state.cart.includes(this.product.id)
+    },
+    addToCart() {
+      this.$store.commit('cart/add', this.product)
+    },
+    removeFromCart() {
+      this.$store.commit('cart/remove', this.product.id)
+    },
+  },
 }
 </script>
 

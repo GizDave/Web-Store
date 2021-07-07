@@ -65,7 +65,30 @@
 
 <script>
 export default {
-
+    name: "Cart",
+  data() {
+    return {
+      cart: [],
+    };
+  },
+  beforeMount() {
+    this.getCart();
+  },
+  methods: {
+    removeFromCart(itemId) {
+      const cartItems = JSON.parse(localStorage.getItem("cart"));
+      const index = cartItems.findIndex(itemId);
+      cartItems.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+    },
+    getCart() {
+      if (!localStorage.getItem("cart")) {
+        localStorage.setItem("cart", JSON.stringify([]));
+      }
+      this.cart = JSON.parse(localStorage.getItem("cart"));
+    },
+  },
 }
 </script>
 

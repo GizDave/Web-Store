@@ -36,7 +36,7 @@
               </div>
           </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
-            <a href="/cart">cart</a>
+            <a href="/cart">cart ({{ total }})</a>
           </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
             <a href="/account">account</a>
@@ -49,7 +49,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {  
+      total: this.$store.state.cart.list.length
+    }
+  },
+}
 </script>
 
 <style>
