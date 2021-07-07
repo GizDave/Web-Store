@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-    @Query(value = "SELECT c.customerid FROM Customer c WHERE c.userid = ?1", nativeQuery = true)
+    @Query(value = "SELECT c.customerid FROM Customers c WHERE c.userid = ?1", nativeQuery = true)
     Integer getCustomerIdByUserId(int userId);
 }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface CustomerPaymentRepository extends JpaRepository<CustomerPayment, Integer> {
-    @Query(value = "SELECT cp FROM CustomerPayment cp WHERE cp.customerid = ?1", nativeQuery = true)
+    @Query(value = "SELECT cp FROM Customer_Payments cp WHERE cp.customerid = ?1", nativeQuery = true)
     List<CustomerPayment> findByCustomerId(int customerId);
 }

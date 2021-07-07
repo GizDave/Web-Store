@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerAddressRepository extends JpaRepository<CustomerAddressBridge, Integer> {
-    @Query(value = "SELECT cab.Address FROM CustomerAddressBridge cab WHERE cab.customerid = ?1", nativeQuery = true)
+    @Query(value = "SELECT cab.Address FROM Customer_Address_Bridge cab WHERE cab.customerid = ?1", nativeQuery = true)
     Address getAddressByCustomerId(int customerid);
 }
