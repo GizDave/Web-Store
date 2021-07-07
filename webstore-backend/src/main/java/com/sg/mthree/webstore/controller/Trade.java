@@ -1,18 +1,18 @@
 package main.java.com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.CustomerAddressRepository;
-import main.java.com.sg.mthree.webstore.model.dao.CustomerOrderRepository;
-import main.java.com.sg.mthree.webstore.model.dao.CustomerPaymentRepository;
-import main.java.com.sg.mthree.webstore.model.dao.CustomerRepository;
+import main.java.com.sg.mthree.webstore.model.dao.*;
 import main.java.com.sg.mthree.webstore.model.dto.CustomerOrder;
 import main.java.com.sg.mthree.webstore.model.dto.CustomerPayment;
 import main.java.com.sg.mthree.webstore.model.dto.CustomerPaymentSummary;
+import main.java.com.sg.mthree.webstore.model.dto.Product;
 import main.java.com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -29,6 +29,9 @@ public class Trade {
 
     @Autowired
     private CustomerOrderRepository customerOrderDB;
+
+    @Autowired
+    private ProductRepository productDB;
 
     @GetMapping("/prefill/{userId}")
     public ResponseEntity<CustomerPayment> getCustomer(@RequestParam("CustomerId") int userId) {
@@ -49,7 +52,7 @@ public class Trade {
         convert = new Converter();
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/detail/paymentmethod")
     public ResponseEntity<CustomerPaymentSummary> prefillPaymentMethod(int customerId){
         CustomerPaymentSummary cps = convert.toCustomerPaymentSummary(customerId);
         if(cps == null) {
@@ -63,8 +66,32 @@ public class Trade {
     }
 
     @PostMapping("/placeorder")
-    public ResponseEntity<Integer> placeOrder(CustomerPaymentSummary paymentInformation){
+    public ResponseEntity<String> placeOrder(@RequestParam("ProductId") int productId,
+                                              @RequestParam("Quantity") int quantity,
+                                              @RequestParam("PaymentMethodId") int paymentMethodId){
+        if(!customerPaymentDB.existsById(paymentMethodId)) {
+            return ResponseEntity.badRequest()
+                    .body("Payment method does not exist.");
+        }
+        else {
+            Optional<Product> p = productDB.findById(productId);
+            if(!p.isPresent()) {
+                return ResponseEntity.badRequest()
+                        .body("Product does not exist.");
+            }
 
+            CustomerPayment cp = customerPaymentDB.getById(paymentMethodId);
+
+            CustomerOrder newOrder = new CustomerOrder();
+            newOrder.setPaymentmethodid(cp.getPaymentmethodid());
+            newOrder.setCustomerid(cp.getCustomerid());
+            newOrder.setDate_ordered(LocalDateTime.now());
+            newOrder.setTotal_price(p.get().getPrice() * quantity);
+            newOrder = customerOrderDB.save(newOrder);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(String.format("Order %d is placed.", newOrder.getOrderid()));
+        }
     }
 
     @DeleteMapping("/deleteorder/{orderId}")

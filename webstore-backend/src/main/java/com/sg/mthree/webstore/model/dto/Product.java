@@ -21,8 +21,6 @@ public class Product {
     @Column
     private int categoryid;
     @Column
-    private int stockid;
-    @Column
     private String thumbnail;
     @Column
     private float price;

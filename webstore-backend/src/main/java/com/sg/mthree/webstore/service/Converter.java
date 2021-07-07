@@ -35,7 +35,7 @@ public class Converter {
             ProductSummary tn = new ProductSummary();
             tn.setProductid(p.getProductid());
             tn.setName(p.getName());
-            tn.setInstock(stockDB.existsById(p.getStockid()));
+            tn.setInstock(stockDB.existsById(stockDB.findByProductId(p.getProductid())));
             tn.setPrice(p.getPrice());
             tn.setDescription(p.getDescription());
             tn.setImages(imageDB.findByProductId(p.getProductid()));

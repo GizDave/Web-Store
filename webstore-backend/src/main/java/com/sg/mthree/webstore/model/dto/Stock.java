@@ -13,6 +13,8 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stockid;
     @Column
+    private int productid;
+    @Column
     private boolean instock;
     @Column
     private int quantity;

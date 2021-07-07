@@ -19,11 +19,9 @@ public class CustomerOrder {
     @Column
     private int customerid;
     @Column
-    private LocalDateTime date_paid;
+    private LocalDateTime date_ordered;
     @Column
-    private BigDecimal total_price;
-    @Column
-    private int order_status_code;
+    private float total_price;
     @ManyToOne
     @JoinColumn(name = "paymentmethodid")
     private CustomerPayment customerPayment;
