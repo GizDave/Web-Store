@@ -11,15 +11,16 @@ import java.io.Serializable;
 @Entity(name = "Customer_Address_Bridge")
 public class CustomerAddressBridge implements Serializable {
     @Id
-    @Column
+    @Column(name = "customerid")
     private int customerid;
     @Id
-    @Column
+    @Column(name = "addressid")
     private int addressid;
     @ManyToOne
+    @PrimaryKeyJoinColumn(name="customerid", referencedColumnName="customerid")
     @JoinColumn(name = "customerid")
     private Customer customer;
     @ManyToOne
-    @JoinColumn(name = "addressid")
+    @PrimaryKeyJoinColumn(name="addressid", referencedColumnName="addressid")
     private Address address;
 }

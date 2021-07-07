@@ -11,10 +11,11 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userid")
     private int userid;
-    @Column
+    @Column(name = "username")
     private String username;
-    @Column
+    @Column(name = "password")
     private String password;
     @Column(name = "isadmin")
     private boolean admin;

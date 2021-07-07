@@ -11,12 +11,12 @@ import java.io.Serializable;
 @Entity(name = "Customer_Order_Product_Bridge")
 public class CustomerOrderProductBridge implements Serializable {
     @Id
-    @Column
+    @Column(name = "orderid")
     private int orderid;
     @Id
-    @Column
+    @Column(name = "productid")
     private int productid;
-    @Column
+    @Column(name = "quantity")
     private int quantity;
     @ManyToOne
     @JoinColumn(name = "orderid")

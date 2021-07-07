@@ -11,10 +11,11 @@ import javax.persistence.*;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "imageid")
     private int imageid;
-    @Column(insertable = false, updatable = false)
+    @Column(name = "productid", insertable = false, updatable = false)
     private int productid;
-    @Column
+    @Column(name = "image_path")
     private String image_path;
     @ManyToOne
     @JoinColumn(name = "productid")

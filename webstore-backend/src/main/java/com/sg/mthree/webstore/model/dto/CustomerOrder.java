@@ -13,14 +13,15 @@ import java.time.LocalDateTime;
 public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "addressid")
     private int orderid;
-    @Column(insertable = false, updatable = false)
+    @Column(name = "paymentmethodid", insertable = false, updatable = false)
     private int paymentmethodid;
-    @Column(insertable = false, updatable = false)
+    @Column(name = "customerid", insertable = false, updatable = false)
     private int customerid;
-    @Column
+    @Column(name = "date_ordered")
     private LocalDateTime date_ordered;
-    @Column
+    @Column(name = "total_price")
     private float total_price;
     @ManyToOne
     @JoinColumn(name = "paymentmethodid")

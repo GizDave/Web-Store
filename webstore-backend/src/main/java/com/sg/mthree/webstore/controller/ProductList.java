@@ -38,7 +38,6 @@ public class ProductList {
     private List<Category> categoryOption;
     private List<Integer> itemCountOption;
     private List<String> displayOrderOption;
-    private Map<String, Sort.Direction> displayOrderOptionMap;
 
     private Converter convert;
 
@@ -48,11 +47,9 @@ public class ProductList {
         System.out.println("itemcountoption");
         String[] doOption = {"Ascending", "Descending", "None"};
         displayOrderOption = Arrays.asList(doOption);
-        displayOrderOptionMap = new HashMap<String, Sort.Direction>();
-        displayOrderOptionMap.put("Ascending", Sort.Direction.ASC);
-        displayOrderOptionMap.put("Descending", Sort.Direction.DESC);
-        displayOrderOptionMap.put("None", Sort.Direction.ASC); // default sort order
         System.out.println("displayorderoptionmap");
+        System.out.println(categoryDB == null);
+        System.out.println(categoryDB.findById(1).get().getName());
         categoryOption = categoryDB.findAll();
         System.out.println("categoryoption");
         pageNumber = 0;
@@ -83,7 +80,7 @@ public class ProductList {
     @PutMapping("/pageNumber/set/{newPageNumber}")
     public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
         if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
-            this.pageNumber = pageNumber;
+            this.pageNumber = newPageNumber;
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
         }
@@ -106,7 +103,7 @@ public class ProductList {
     }
     @PutMapping("/displayOrder/set/{displayOrderIndex}")
     public ResponseEntity<List<ProductSummary>> setDisplayOrder(@RequestParam int displayOrderIndex){
-        if(displayOrderIndex >= 0 && displayOrderIndex < itemCountOption.size()) {
+        if(displayOrderIndex >= 0 && displayOrderIndex < displayOrderOption.size()) {
             this.displayOrder = displayOrderOption.get(displayOrderIndex);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
@@ -173,17 +170,18 @@ public class ProductList {
         if(query != null) {
             if(query.length() > 0) {
                 tempP = productDB.findByName(query);
-                Collections.sort(tempP);
             }
             else {
                 return;
             }
         }
         else {
-            tempP = productDB.findByCategoryId(
-                    category.getCategoryid(),
-                    Sort.by(displayOrderOptionMap.get(displayOrder), "name")
-            );
+            tempP = productDB.findByCategoryId(category.getCategoryid());
+        }
+
+        Collections.sort(tempP);
+        if(displayOrder == "Descending"){
+            Collections.reverse(tempP);
         }
 
         buffer = convert.productToThumbnail(tempP);

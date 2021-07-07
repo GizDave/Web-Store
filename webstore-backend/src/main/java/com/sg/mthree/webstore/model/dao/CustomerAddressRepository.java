@@ -4,8 +4,10 @@ import main.java.com.sg.mthree.webstore.model.dto.Address;
 import main.java.com.sg.mthree.webstore.model.dto.CustomerAddressBridge;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface CustomerAddressRepository extends JpaRepository<CustomerAddressBridge,Integer> {
-    @Query("SELECT cab.Address FROM CustomerAddressBridge cab WHERE cab.customerid = ?1")
+@Repository
+public interface CustomerAddressRepository extends JpaRepository<CustomerAddressBridge, Integer> {
+    @Query(value = "SELECT cab.Address FROM CustomerAddressBridge cab WHERE cab.customerid = ?1", nativeQuery = true)
     Address getAddressByCustomerId(int customerid);
 }

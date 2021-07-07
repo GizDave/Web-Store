@@ -11,11 +11,12 @@ import javax.persistence.*;
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stockid")
     private int stockid;
-    @Column
+    @Column(name = "productid")
     private int productid;
-    @Column
+    @Column(name = "instock")
     private boolean instock;
-    @Column
+    @Column(name = "quantity")
     private int quantity;
 }

@@ -13,7 +13,7 @@ create table Products (
     description		text,
     categoryid		int,
     thumbnail 		text,
-    price			decimal(10,2),
+    price			float,
     foreign key (categoryid) references Categories(categoryid)
 );
 
