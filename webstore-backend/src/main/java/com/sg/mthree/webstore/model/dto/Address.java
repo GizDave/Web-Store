@@ -7,19 +7,20 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Addresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "addressid")
     private int addressid;
-    @Column
+    @Column(name = "street")
     private String street;
-    @Column
+    @Column(name = "city")
     private String city;
-    @Column
+    @Column(name = "state")
     private String state;
-    @Column
+    @Column(name = "zipcode")
     private String zipcode;
-    @Column
+    @Column(name = "country")
     private String country;
 }

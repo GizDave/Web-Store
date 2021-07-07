@@ -7,13 +7,16 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Stock")
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stockid")
     private int stockid;
-    @Column
+    @Column(name = "productid")
+    private int productid;
+    @Column(name = "instock")
     private boolean instock;
-    @Column
+    @Column(name = "quantity")
     private int quantity;
 }

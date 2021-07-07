@@ -7,20 +7,21 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Customers")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customerid")
     private int customerid;
-    @Column
+    @Column(name = "userid", insertable = false, updatable = false)
     private int userid;
-    @Column
+    @Column(name = "first_name")
     private String first_name;
-    @Column
+    @Column(name = "last_name")
     private String last_name;
-    @Column
+    @Column(name = "phone")
     private String phone;
-    @Column
+    @Column(name = "email")
     private String email;
     @ManyToOne
     @JoinColumn(name = "userid")

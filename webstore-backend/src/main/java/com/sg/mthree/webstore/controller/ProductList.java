@@ -1,14 +1,21 @@
-package com.sg.mthree.webstore.controller;
+package main.java.com.sg.mthree.webstore.controller;
 
-import com.sg.mthree.webstore.model.dao.CategoryRepository;
-import com.sg.mthree.webstore.model.dao.ProductRepository;
-import com.sg.mthree.webstore.model.dto.Category;
-import com.sg.mthree.webstore.model.dto.Product;
+import main.java.com.sg.mthree.webstore.model.dao.CategoryRepository;
+import main.java.com.sg.mthree.webstore.model.dao.ImageRepository;
+import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
+import main.java.com.sg.mthree.webstore.model.dto.Category;
+import main.java.com.sg.mthree.webstore.model.dto.Product;
+import main.java.com.sg.mthree.webstore.model.dto.ProductSummary;
+import main.java.com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,108 +27,177 @@ public class ProductList {
     @Autowired
     private CategoryRepository categoryDB;
 
+    @Autowired
+    private ImageRepository imageDB;
+
     private int pageNumber;
     private int itemCount;
     private int totalCount;
-    private Category category;
     private String displayOrder;
+    private Category category;
 
+    private List<ProductSummary> buffer;
     private List<Category> categoryOption;
     private List<Integer> itemCountOption;
     private List<String> displayOrderOption;
 
-    public ProductList(){
-        Integer[] icOption = {10, 15, 25, 30};
+    @Autowired
+    private Converter convert;
+
+    @PostConstruct
+    private void setup(){
+        Integer[] icOption = {2, 3, 4};
         itemCountOption = Arrays.asList(icOption);
 
         String[] doOption = {"Ascending", "Descending", "None"};
         displayOrderOption = Arrays.asList(doOption);
 
-        refreshCategoryOption();
+        categoryOption = categoryDB.findAll();
 
-        pageNumber = 1;
+        pageNumber = 0;
         itemCount = itemCountOption.get(0);
         category = categoryOption.get(0);
         displayOrder = displayOrderOption.get(2);
+
+        buffer = new ArrayList<>();
+        refreshBuffer(null);
     }
 
-    @GetMapping("/get/pageNumber")
+    @GetMapping("/pageNumber/get")
     public int getPageNumber(){return pageNumber+1;}
-    @GetMapping("/get/itemCount")
+    @GetMapping("/maxPageNumber/get")
+    public int getMaxPageNumber(){return (int) Math.ceil(totalCount/itemCount) + 1;}
+    @GetMapping("/itemCount/get")
     public int getItemCount(){return itemCount;}
-    @GetMapping("/get/displayOrder")
+    @GetMapping("/category/get")
+    public Category getCategory(){return category;}
+    @GetMapping("/displayOrder/get")
     public String getDisplayOrder(){return displayOrder;}
-//    @GetMapping("/get/availableItemCounts")
-//    public int[] getItemCountOption(){return itemCountOption;}
-//    @GetMapping("/get/availableDisplayOrders")
-//    public String[] getDisplayOrderOption(){return displayOrderOption;}
-//    @GetMapping("/get/categories")
-//    public List<String> getCategories(){return categoryDB.findAllName();}
+    @GetMapping("/availableItemCounts/get")
+    public List<Integer> getItemCountOption(){return itemCountOption;}
+    @GetMapping("/availableDisplayOrders/get")
+    public List<String> getDisplayOrderOption(){return displayOrderOption;}
+    @GetMapping("/availableCategoryOption/get")
+    public List<Category> getCategories(){return categoryOption;}
+    @GetMapping("/products/get/all")
+    public List<ProductSummary> getAllProducts(){
+        List<Product> tempAgg = productDB.findAll();
+        List<ProductSummary> buffer = new ArrayList<>();
+        return convert.productToThumbnail(tempAgg, buffer);
+    }
 
-//    @PutMapping("/set")
-//    public ResponseEntity<String> setPageNumber(@RequestParam("pageNumber") int newPageNumber){
-//        if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
-//            this.pageNumber = pageNumber;
-//        }
-//        else {
-//
-//        }
-//    }
-//    @PutMapping("/set")
-//    public ResponseEntity<String> setItemCount(@RequestParam("itemCount") int itemCountIdex){
-//        if() {
-//
-//        }
-//        else {
-//
-//        }
-//    }
-//    @PutMapping("/set")
-//    public ResponseEntity<String> setDisplayOrder(@RequestParam("displayOrder") int displayOrderIndex){
-//        if() {
-//
-//        }
-//        else {
-//
-//        }
-//    }
-//    @PutMapping("/set")
-//    public ResponseEntity<String> setCategory(@RequestParam("category") int categoryIndex){
-//        if() {
-//
-//        }
-//        else {
-//
-//        }
-//    }
-//
-//    @GetMapping("/nextpage")
-//    public ResponseEntity<List<Product>> nextPage(){
-//        if(itemCount * (pageNumber + 1) > totalCount){
-//
-//        }
-//        else {
-//
-//        }
-//    }
-//
-//    @GetMapping("/previouspage")
-//    public ResponseEntity<List<Product>> prevPage(){
-//        if(pageNumber - 1 < 1){
-//
-//        }
-//        else {
-//
-//        }
-//    }
+
+    @PutMapping("/pageNumber/set/{newPageNumber}")
+    public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
+        if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
+            this.pageNumber = newPageNumber;
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(refreshPage());
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
+    @PutMapping("/itemCount/set/{itemCountIndex}")
+    public ResponseEntity<List<ProductSummary>> setItemCount(@RequestParam int itemCountIndex) {
+        if(itemCountIndex >= 0 && itemCountIndex < itemCountOption.size()) {
+            this.itemCount = itemCountOption.get(itemCountIndex);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(refreshPage());
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
+    @PutMapping("/displayOrder/set/{displayOrderIndex}")
+    public ResponseEntity<List<ProductSummary>> setDisplayOrder(@RequestParam int displayOrderIndex){
+        if(displayOrderIndex >= 0 && displayOrderIndex < displayOrderOption.size()) {
+            this.displayOrder = displayOrderOption.get(displayOrderIndex);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(refreshPage());
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
+    @PutMapping("/categories/set/{categoryIndex}")
+    public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam String categoryName) {
+        Category temp = categoryDB.getCategoryByName(categoryName).get(0);
+        if(temp != null) {
+            this.category = temp;
+            refreshBuffer(null);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(refreshPage());
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/nextPage")
+    public ResponseEntity<List<ProductSummary>> nextPage() {
+        if(itemCount * (pageNumber + 1) > totalCount) {
+            pageNumber += 1;
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(refreshPage());
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
+
+    @GetMapping("/previousPage")
+    public ResponseEntity<List<ProductSummary>> prevPage() {
+        if(pageNumber - 1 < 1){
+            pageNumber -= 1;
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(refreshPage());
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
 
     @GetMapping("/search/{query}")
-    public List<Product> search(@RequestParam String query){
+    public ResponseEntity<List<ProductSummary>> search(@RequestParam String query) {
         pageNumber = 0;
-        return productDB.findByName(query, pageNumber, itemCount, displayOrder);
+        refreshBuffer(query);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(refreshPage());
     }
 
-    private void refreshCategoryOption(){
-        categoryOption = categoryDB.findAll();
+    private void refreshBuffer(String query){
+        buffer.clear();
+        List<Product> tempP = null;
+
+        if(query != null) {
+            if(query.length() > 0) {
+                tempP = productDB.findByName(query);
+            }
+            else {
+                return;
+            }
+        }
+        else {
+            tempP = productDB.findByCategoryId(category.getCategoryid());
+        }
+
+        Collections.sort(tempP);
+        if(displayOrder == "Descending"){
+            Collections.reverse(tempP);
+        }
+
+        convert.productToThumbnail(tempP, buffer);
+        totalCount = buffer.size();
+    }
+
+    private List<ProductSummary> refreshPage() {
+        return buffer.subList(pageNumber*itemCount, Math.min(buffer.size(), (pageNumber+1)*itemCount));
     }
 }

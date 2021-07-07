@@ -9,23 +9,20 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Customer_Orders")
 public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "addressid")
     private int orderid;
-    @Column
+    @Column(name = "paymentmethodid", insertable = false, updatable = false)
     private int paymentmethodid;
-    @Column
+    @Column(name = "customerid", insertable = false, updatable = false)
     private int customerid;
-    @Column
+    @Column(name = "date_ordered")
     private LocalDateTime date_ordered;
-    @Column
-    private LocalDateTime date_paid;
-    @Column
-    private BigDecimal total_price;
-    @Column
-    private int order_status_code;
+    @Column(name = "total_price")
+    private float total_price;
     @ManyToOne
     @JoinColumn(name = "paymentmethodid")
     private CustomerPayment customerPayment;

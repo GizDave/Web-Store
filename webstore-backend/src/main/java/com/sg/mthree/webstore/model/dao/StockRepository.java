@@ -3,8 +3,12 @@ package com.sg.mthree.webstore.model.dao;
 import com.sg.mthree.webstore.model.dto.Stock;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-public interface StockRepository extends JpaRepository<Stock,Integer> {
-    @Query("SELECT CASE WHEN s.instock = true THEN s.quantity ELSE null END FROM Stock s WHERE s.stockid = ?1")
-    Integer getAvailableOptionStock(int stockId);
+import java.util.List;
+
+@Repository
+public interface StockRepository extends JpaRepository<Stock, Integer> {
+    @Query("SELECT new java.lang.Boolean(CASE WHEN (s.instock = true AND s.quantity > 0) THEN true ELSE false END) FROM Stock s WHERE s.productid = ?1") // not checked against ordered quantity
+    Boolean hasStock(int productid);
 }
