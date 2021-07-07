@@ -27,14 +27,14 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="#">
+                                <nuxt-link to="#">
                                     <p class="mb-2 md:ml-4">Placeholder Product</p>
                                     <form action="" method="POST">
                                         <button type="submit" class="text-gray-700 md:ml-4">
                                             <small>(Remove item)</small>
                                         </button>
                                     </form>
-                                </a>
+                                </nuxt-link>
                             </td>
                             <td class="justify-center mt-6 md:justify-end md:flex">
                                 <div class="w-20 h-10">
@@ -75,18 +75,11 @@ export default {
     this.getCart();
   },
   methods: {
-    removeFromCart(itemId) {
-      const cartItems = JSON.parse(localStorage.getItem("cart"));
-      const index = cartItems.findIndex(itemId);
-      cartItems.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cartItems));
-      this.cart = JSON.parse(localStorage.getItem("cart"));
+    removeFromCart(productid) {
+      this.$store.commit('cart/remove', productid)
     },
     getCart() {
-      if (!localStorage.getItem("cart")) {
-        localStorage.setItem("cart", JSON.stringify([]));
-      }
-      this.cart = JSON.parse(localStorage.getItem("cart"));
+      this.cart = this.$store.state.cart.list
     },
   },
 }

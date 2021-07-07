@@ -10,7 +10,7 @@
           <ProductCard/>
         </div>
         <button class="flex flex-col px-2 py-3 mt-5 mb-8 font-semibold text-center text-white bg-yellow-400 rounded-lg text-md hover:bg-yellow-300">
-            <a href="/products/keyboards">View More Products</a>
+            <nuxt-link to="/products/keyboards">View More Products</nuxt-link>
         </button>
       </div>
       <div class="flex flex-col items-center">
