@@ -1,4 +1,4 @@
-package com.sg.mthree.webstore.model.dto;
+package main.java.com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Addresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

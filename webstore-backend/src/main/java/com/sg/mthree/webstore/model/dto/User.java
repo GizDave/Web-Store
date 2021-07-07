@@ -1,4 +1,4 @@
-package com.sg.mthree.webstore.model.dto;
+package main.java.com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

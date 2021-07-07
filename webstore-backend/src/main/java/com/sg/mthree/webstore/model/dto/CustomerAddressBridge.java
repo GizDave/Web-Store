@@ -1,14 +1,15 @@
-package com.sg.mthree.webstore.model.dto;
+package main.java.com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
-@Entity
-public class CustomerAddressBridge {
+@Entity(name = "Customer_Address_Bridge")
+public class CustomerAddressBridge implements Serializable {
     @Id
     @Column
     private int customerid;

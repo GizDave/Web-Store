@@ -1,4 +1,4 @@
-package com.sg.mthree.webstore.model.dto;
+package main.java.com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,12 +8,12 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "Customers")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerid;
-    @Column
+    @Column(insertable = false, updatable = false)
     private int userid;
     @Column
     private String first_name;
