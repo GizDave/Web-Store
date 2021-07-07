@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
     <div class="space-y-3 md:flex">
+=======
+    <div class="">
+>>>>>>> c9a012e20b0d51b1a0d934cfde080667e0bdfad1
         <AddressCard v-for="address in addresses" :id="address.id" :key="address.id" :street="address.street" :city="address.city" :state="address.state" :zipcode="address.zipcode" :country="address.country"/>
         <!--         
         <div>{id}</div>

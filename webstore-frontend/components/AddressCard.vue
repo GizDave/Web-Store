@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 <div class="space-y-3 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-xs">
     <h4>Address {{id}}</h4>
   <div class="md:flex">
@@ -12,6 +13,16 @@
     </div>
   </div>
 </div>
+=======
+    <div class="">
+        <div>{{id}}</div>
+        <div>{{street}}</div>
+        <div>{{city}}</div>
+        <div>{{state}}</div>
+        <div>{{zipcode}}</div>
+        <div>{{country}}</div>
+    </div>
+>>>>>>> c9a012e20b0d51b1a0d934cfde080667e0bdfad1
 </template>
 <script>
 export default {
