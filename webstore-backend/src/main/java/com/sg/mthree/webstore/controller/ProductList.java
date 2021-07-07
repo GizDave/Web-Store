@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 
 @RestController
@@ -41,24 +42,23 @@ public class ProductList {
 
     private Converter convert;
 
-    public ProductList(){
+    @PostConstruct
+    private void setup(){
         Integer[] icOption = {10, 15, 20};
         itemCountOption = Arrays.asList(icOption);
-        System.out.println("itemcountoption");
+
         String[] doOption = {"Ascending", "Descending", "None"};
         displayOrderOption = Arrays.asList(doOption);
-        System.out.println("displayorderoptionmap");
-        System.out.println(categoryDB == null);
-        System.out.println(categoryDB.findById(1).get().getName());
+
         categoryOption = categoryDB.findAll();
-        System.out.println("categoryoption");
+
         pageNumber = 0;
         itemCount = itemCountOption.get(0);
         category = categoryOption.get(0);
         displayOrder = displayOrderOption.get(2);
-        System.out.println("basic stats");
+
         refreshBuffer(null);
-        System.out.println("refreshbuffer");
+
         convert = new Converter();
     }
 

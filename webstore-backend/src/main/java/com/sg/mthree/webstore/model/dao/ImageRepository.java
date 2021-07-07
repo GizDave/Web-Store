@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Integer> {
     @Query(value = "SELECT i from Image i WHERE i.productid = ?1", nativeQuery = true)
