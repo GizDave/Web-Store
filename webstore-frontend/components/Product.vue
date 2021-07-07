@@ -1,5 +1,5 @@
 <template>
-  <div class="container justify-items-center">
+  <div class="justify-items-center">
     <NavBar/>
     <div class="grid grid-cols-2">
         <div class="grid w-full h-auto grid-cols-1 gap-4 justify-items-end md:pr-6">
