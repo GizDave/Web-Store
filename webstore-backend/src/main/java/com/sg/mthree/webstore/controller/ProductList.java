@@ -46,7 +46,7 @@ public class ProductList {
 
     @PostConstruct
     private void setup(){
-        Integer[] icOption = {10, 15, 20};
+        Integer[] icOption = {2, 3, 4};
         itemCountOption = Arrays.asList(icOption);
 
         String[] doOption = {"Ascending", "Descending", "None"};
@@ -66,16 +66,18 @@ public class ProductList {
     @GetMapping("/pageNumber/get")
     public int getPageNumber(){return pageNumber+1;}
     @GetMapping("/maxPageNumber/get")
-    public int getMaxPageNumber(){return (int) Math.ceil(totalCount/itemCount);}
+    public int getMaxPageNumber(){return (int) Math.ceil(totalCount/itemCount) + 1;}
     @GetMapping("/itemCount/get")
     public int getItemCount(){return itemCount;}
+    @GetMapping("/category/get")
+    public Category getCategory(){return category;}
     @GetMapping("/displayOrder/get")
     public String getDisplayOrder(){return displayOrder;}
     @GetMapping("/availableItemCounts/get")
     public List<Integer> getItemCountOption(){return itemCountOption;}
     @GetMapping("/availableDisplayOrders/get")
     public List<String> getDisplayOrderOption(){return displayOrderOption;}
-    @GetMapping("/categories/get")
+    @GetMapping("/availableCategoryOption/get")
     public List<Category> getCategories(){return categoryOption;}
     @GetMapping("/products/get/all")
     public List<ProductSummary> getAllProducts(){
