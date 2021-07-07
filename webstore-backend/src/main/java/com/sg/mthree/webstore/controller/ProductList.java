@@ -1,13 +1,13 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.CategoryRepository;
-import main.java.com.sg.mthree.webstore.model.dao.ImageRepository;
-import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
-import main.java.com.sg.mthree.webstore.model.dto.Category;
-import main.java.com.sg.mthree.webstore.model.dto.Image;
-import main.java.com.sg.mthree.webstore.model.dto.Product;
-import main.java.com.sg.mthree.webstore.model.dto.ProductSummary;
-import main.java.com.sg.mthree.webstore.service.Converter;
+import com.sg.mthree.webstore.model.dao.CategoryRepository;
+import com.sg.mthree.webstore.model.dao.ImageRepository;
+import com.sg.mthree.webstore.model.dao.ProductRepository;
+import com.sg.mthree.webstore.model.dto.Category;
+import com.sg.mthree.webstore.model.dto.Image;
+import com.sg.mthree.webstore.model.dto.Product;
+import com.sg.mthree.webstore.model.dto.ProductSummary;
+import com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -20,13 +20,11 @@ import java.util.*;
 @RestController
 @RequestMapping("/productlist")
 public class ProductList {
-    @Autowired
+
     private ProductRepository productDB;
 
-    @Autowired
     private CategoryRepository categoryDB;
 
-    @Autowired
     private ImageRepository imageDB;
 
     private int pageNumber;
@@ -41,6 +39,14 @@ public class ProductList {
     private List<String> displayOrderOption;
 
     private Converter convert;
+
+    @Autowired
+    public ProductList(ProductRepository productDB, CategoryRepository categoryDB, ImageRepository imageDB) {
+        this.productDB = productDB;
+        this.categoryDB = categoryDB;
+        this.imageDB = imageDB;
+        this.setup();
+    }
 
     @PostConstruct
     private void setup(){

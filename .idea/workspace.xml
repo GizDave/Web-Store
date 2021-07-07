@@ -4,16 +4,64 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da02f934-d3f1-4b84-bc0b-7b9a7e987eaa" name="Default Changelist" comment="" />
+    <list default="true" id="da02f934-d3f1-4b84-bc0b-7b9a7e987eaa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/webstore-backend/src/test/java/com/sg/mthree/webstore/controller/ProductListTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webstore-backend/src/test/java/com/sg/mthree/webstore/controller/ProfileTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/WebStoreApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/WebStoreApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/MainPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/ProductList.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/ProductList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Profile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Signin.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Signin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Signup.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Signup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Trade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/AddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerAddressRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerOrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerOrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerPaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerPaymentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/ImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/ImageRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/StockRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/StockRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerAddressBridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerAddressBridge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerOrderProductBridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerOrderProductBridge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerPaymentSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerPaymentSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Image.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/ProductSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/ProductSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/service/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/service/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstore-backend/src/test/java/com/sg/mthree/webstore/WebStoreApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/test/java/com/sg/mthree/webstore/WebStoreApplicationTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="3" />
+  </component>
   <component name="ProjectId" id="1ulKrgcEnrcO4Lxh8Qqwlc0WeJP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -21,8 +69,56 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.sg.mthree.webstore.controller" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductListTest.getPageNumber" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="webstore" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sg.mthree.webstore.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sg.mthree.webstore.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.sg.mthree.webstore.controller.ProductListTest" />
+      <option name="METHOD_NAME" value="getPageNumber" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ProductListTest.getPageNumber" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -45,5 +141,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

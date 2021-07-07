@@ -1,7 +1,7 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.CustomerRepository;
-import main.java.com.sg.mthree.webstore.model.dao.UserRepository;
+import com.sg.mthree.webstore.model.dao.CustomerRepository;
+import com.sg.mthree.webstore.model.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

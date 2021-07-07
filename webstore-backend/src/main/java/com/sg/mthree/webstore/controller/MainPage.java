@@ -1,10 +1,10 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.ImageRepository;
-import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
-import main.java.com.sg.mthree.webstore.model.dto.Product;
-import main.java.com.sg.mthree.webstore.model.dto.ProductSummary;
-import main.java.com.sg.mthree.webstore.service.Converter;
+import com.sg.mthree.webstore.model.dao.ImageRepository;
+import com.sg.mthree.webstore.model.dao.ProductRepository;
+import com.sg.mthree.webstore.model.dto.Product;
+import com.sg.mthree.webstore.model.dto.ProductSummary;
+import com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,8 @@ public class MainPage {
     @Autowired
     private ImageRepository imageDB;
 
-    private Converter convert;
+    private
+    Converter convert;
 
     public MainPage() {
         convert = new Converter();

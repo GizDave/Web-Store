@@ -1,11 +1,11 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.*;
-import main.java.com.sg.mthree.webstore.model.dto.CustomerOrder;
-import main.java.com.sg.mthree.webstore.model.dto.CustomerPayment;
-import main.java.com.sg.mthree.webstore.model.dto.CustomerPaymentSummary;
-import main.java.com.sg.mthree.webstore.model.dto.Product;
-import main.java.com.sg.mthree.webstore.service.Converter;
+import com.sg.mthree.webstore.model.dao.*;
+import com.sg.mthree.webstore.model.dto.CustomerOrder;
+import com.sg.mthree.webstore.model.dto.CustomerPayment;
+import com.sg.mthree.webstore.model.dto.CustomerPaymentSummary;
+import com.sg.mthree.webstore.model.dto.Product;
+import com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

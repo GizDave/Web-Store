@@ -1,4 +1,4 @@
-package main.java.com.sg.mthree.webstore.model.dto;
+package com.sg.mthree.webstore.model.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

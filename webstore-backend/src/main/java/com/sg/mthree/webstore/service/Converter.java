@@ -1,7 +1,10 @@
-package main.java.com.sg.mthree.webstore.service;
+package com.sg.mthree.webstore.service;
 
-import main.java.com.sg.mthree.webstore.model.dao.*;
-import main.java.com.sg.mthree.webstore.model.dto.*;
+import com.sg.mthree.webstore.model.dao.*;
+import com.sg.mthree.webstore.model.dto.Customer;
+import com.sg.mthree.webstore.model.dto.CustomerPaymentSummary;
+import com.sg.mthree.webstore.model.dto.Product;
+import com.sg.mthree.webstore.model.dto.ProductSummary;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
