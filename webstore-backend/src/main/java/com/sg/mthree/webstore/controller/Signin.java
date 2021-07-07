@@ -22,14 +22,14 @@ public class Signin {
     @GetMapping
     public ResponseEntity<Integer> login(@RequestParam(name = "username") String username,
                                          @RequestParam(name = "password") String password) {
-        Integer userId = userDB.login(username, password);
+        Integer userId = userDB.login(username, password).get(0);
 
         if(userId == null) {
             return ResponseEntity.badRequest()
                     .body(0);
         }
         else {
-            Integer customerId = customerDB.getCustomerIdByUserId(userId);
+            Integer customerId = customerDB.getCustomerIdByUserId(userId).get(0);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(customerId);
         }

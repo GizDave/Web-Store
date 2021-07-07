@@ -17,4 +17,8 @@ public class ProductSummary {
     private String description;
     private String thumbnail;
     private List<Image> images;
+
+    public boolean getInstock() {
+        return instock;
+    }
 }

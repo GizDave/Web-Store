@@ -9,12 +9,13 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity(name = "Customer_Order_Product_Bridge")
+@IdClass(CustomerOrderProductBridgeId.class)
 public class CustomerOrderProductBridge implements Serializable {
     @Id
-    @Column(name = "orderid")
+    @Column(name = "orderid", insertable = false, updatable = false)
     private int orderid;
     @Id
-    @Column(name = "productid")
+    @Column(name = "productid", insertable = false, updatable = false)
     private int productid;
     @Column(name = "quantity")
     private int quantity;

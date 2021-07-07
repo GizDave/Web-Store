@@ -40,6 +40,7 @@ public class ProductList {
     private List<Integer> itemCountOption;
     private List<String> displayOrderOption;
 
+    @Autowired
     private Converter convert;
 
     @PostConstruct
@@ -57,9 +58,8 @@ public class ProductList {
         category = categoryOption.get(0);
         displayOrder = displayOrderOption.get(2);
 
+        buffer = new ArrayList<>();
         refreshBuffer(null);
-
-        convert = new Converter();
     }
 
     @GetMapping("/pageNumber/get")
@@ -115,7 +115,7 @@ public class ProductList {
     }
     @PutMapping("/categories/set/{categoryIndex}")
     public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam String categoryName) {
-        Category temp = categoryDB.getCategoryByName(categoryName);
+        Category temp = categoryDB.getCategoryByName(categoryName).get(0);
         if(temp != null) {
             this.category = temp;
             refreshBuffer(null);
@@ -163,7 +163,8 @@ public class ProductList {
     }
 
     private void refreshBuffer(String query){
-        buffer = new ArrayList<>();
+        System.out.println(buffer.size());
+        buffer.clear();
         List<Product> tempP = null;
         List<Image> tempI = null;
 
@@ -177,6 +178,13 @@ public class ProductList {
         }
         else {
             tempP = productDB.findByCategoryId(category.getCategoryid());
+            System.out.println(category.getName());
+            System.out.println(tempP == null);
+            if(tempP != null){
+                for(Product p: tempP) {
+                    System.out.println(p.getName());
+                }
+            }
         }
 
         Collections.sort(tempP);
@@ -184,8 +192,9 @@ public class ProductList {
             Collections.reverse(tempP);
         }
 
-        buffer = convert.productToThumbnail(tempP);
+        convert.productToThumbnail(tempP, buffer);
         totalCount = buffer.size();
+        System.out.println(buffer.size());
     }
 
     private List<ProductSummary> refreshPage() {

@@ -13,5 +13,5 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     List<Category> findAll();
 
     @Query(value = "SELECT c FROM Categories c WHERE c.name = ?1", nativeQuery = true)
-    Category getCategoryByName(String name);
+    List<Category> getCategoryByName(String name);
 }

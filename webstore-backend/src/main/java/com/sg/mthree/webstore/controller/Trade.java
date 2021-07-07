@@ -35,14 +35,14 @@ public class Trade {
 
     @GetMapping("/prefill/{userId}")
     public ResponseEntity<CustomerPayment> getCustomer(@RequestParam("customerid") int userId) {
-        Optional<Integer> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
+        Optional<List<Integer>> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
         if(!customerId.isPresent()) {
             return ResponseEntity.badRequest()
                     .body(null);
         }
         else {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(customerPaymentDB.findById(customerId.get()).get());
+                    .body(customerPaymentDB.findById(customerId.get().get(0)).get());
         }
     }
 
