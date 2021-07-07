@@ -10,14 +10,7 @@
          </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
               <div class="relative group">
-                 <nuxt-link to="/products" class="inline-flex">
-                  <span>products</span>
-                  <span class="pt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="nonzero" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </span>
-                 </nuxt-link> 
+                 <nuxt-link to="/products">products</nuxt-link> 
                  <div class="absolute hidden group-hover:block">
                      <ul class="top-0 block px-3 pb-1 bg-white rounded-lg bg-opacity-95">
                          <li class="opacity-50 hover:opacity-100">
@@ -36,10 +29,10 @@
               </div>
           </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
-            <nuxt-link to="/cart">cart ({{ total }})</nuxt-link>
+            <nuxt-link to="/cart">cart</nuxt-link>
           </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
-            <nuxt-link to="/account">account</nuxt-link>
+            <nuxt-link to="/account_options">account</nuxt-link>
           </li>
         </ul>
       </nav>

@@ -46,5 +46,17 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+    auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {url:'/sessions', method: 'post', popertyName: 'token'},
+          logout: {url: '/sessions', method: 'delete'},
+          user: {url:'/sessions/user', method: 'get', propertyName: 'data.attributes'}
+        },
+        tokenType: ''
+      }
+    }
   }
 }
