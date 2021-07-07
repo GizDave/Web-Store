@@ -51,69 +51,69 @@ public class ProductList {
     public int getItemCount(){return itemCount;}
     @GetMapping("/get/displayOrder")
     public String getDisplayOrder(){return displayOrder;}
-    @GetMapping("/get/availableItemCounts")
-    public int[] getItemCountOption(){return itemCountOption;}
-    @GetMapping("/get/availableDisplayOrders")
-    public String[] getDisplayOrderOption(){return displayOrderOption;}
-    @GetMapping("/get/categories")
-    public List<String> getCategories(){return categoryDB.findAllName();}
+//    @GetMapping("/get/availableItemCounts")
+//    public int[] getItemCountOption(){return itemCountOption;}
+//    @GetMapping("/get/availableDisplayOrders")
+//    public String[] getDisplayOrderOption(){return displayOrderOption;}
+//    @GetMapping("/get/categories")
+//    public List<String> getCategories(){return categoryDB.findAllName();}
 
-    @PutMapping("/set")
-    public ResponseEntity<String> setPageNumber(@RequestParam("pageNumber") int newPageNumber){
-        if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
-            this.pageNumber = pageNumber;
-        }
-        else {
-
-        }
-    }
-    @PutMapping("/set")
-    public ResponseEntity<String> setItemCount(@RequestParam("itemCount") int itemCountIdex){
-        if() {
-
-        }
-        else {
-
-        }
-    }
-    @PutMapping("/set")
-    public ResponseEntity<String> setDisplayOrder(@RequestParam("displayOrder") int displayOrderIndex){
-        if() {
-
-        }
-        else {
-
-        }
-    }
-    @PutMapping("/set")
-    public ResponseEntity<String> setCategory(@RequestParam("category") int categoryIndex){
-        if() {
-
-        }
-        else {
-
-        }
-    }
-
-    @GetMapping("/nextpage")
-    public ResponseEntity<List<Product>> nextPage(){
-        if(itemCount * (pageNumber + 1) > totalCount){
-
-        }
-        else {
-
-        }
-    }
-
-    @GetMapping("/previouspage")
-    public ResponseEntity<List<Product>> prevPage(){
-        if(pageNumber - 1 < 1){
-
-        }
-        else {
-
-        }
-    }
+//    @PutMapping("/set")
+//    public ResponseEntity<String> setPageNumber(@RequestParam("pageNumber") int newPageNumber){
+//        if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
+//            this.pageNumber = pageNumber;
+//        }
+//        else {
+//
+//        }
+//    }
+//    @PutMapping("/set")
+//    public ResponseEntity<String> setItemCount(@RequestParam("itemCount") int itemCountIdex){
+//        if() {
+//
+//        }
+//        else {
+//
+//        }
+//    }
+//    @PutMapping("/set")
+//    public ResponseEntity<String> setDisplayOrder(@RequestParam("displayOrder") int displayOrderIndex){
+//        if() {
+//
+//        }
+//        else {
+//
+//        }
+//    }
+//    @PutMapping("/set")
+//    public ResponseEntity<String> setCategory(@RequestParam("category") int categoryIndex){
+//        if() {
+//
+//        }
+//        else {
+//
+//        }
+//    }
+//
+//    @GetMapping("/nextpage")
+//    public ResponseEntity<List<Product>> nextPage(){
+//        if(itemCount * (pageNumber + 1) > totalCount){
+//
+//        }
+//        else {
+//
+//        }
+//    }
+//
+//    @GetMapping("/previouspage")
+//    public ResponseEntity<List<Product>> prevPage(){
+//        if(pageNumber - 1 < 1){
+//
+//        }
+//        else {
+//
+//        }
+//    }
 
     @GetMapping("/search/{query}")
     public List<Product> search(@RequestParam String query){
