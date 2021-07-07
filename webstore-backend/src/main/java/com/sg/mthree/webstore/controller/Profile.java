@@ -39,7 +39,7 @@ public class Profile {
         }
     }
 
-    @GetMapping("/paymentinformation/{customerId}")
+    @GetMapping("/paymentInformation/{customerId}")
     public ResponseEntity<List<CustomerPayment>> getPaymentInformation(@RequestParam int customerId){
         Optional<List<CustomerPayment>> cp = Optional.ofNullable(customerPaymentDB.findByCustomerId(customerId));
         if(!cp.isPresent()) {
@@ -52,7 +52,7 @@ public class Profile {
         }
     }
 
-    @GetMapping("/securityinformation/{customerId}")
+    @GetMapping("/securityInformation/{customerId}")
     public ResponseEntity<User> getSecurityInformation(@RequestParam int customerId){
         Optional<Customer> c = customerDB.findById(customerId);
         if(!c.isPresent()){

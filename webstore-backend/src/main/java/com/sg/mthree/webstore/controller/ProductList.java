@@ -131,7 +131,7 @@ public class ProductList {
         }
     }
 
-    @GetMapping("/nextpage")
+    @GetMapping("/nextPage")
     public ResponseEntity<List<ProductSummary>> nextPage() {
         if(itemCount * (pageNumber + 1) > totalCount) {
             pageNumber += 1;
@@ -144,7 +144,7 @@ public class ProductList {
         }
     }
 
-    @GetMapping("/previouspage")
+    @GetMapping("/previousPage")
     public ResponseEntity<List<ProductSummary>> prevPage() {
         if(pageNumber - 1 < 1){
             pageNumber -= 1;

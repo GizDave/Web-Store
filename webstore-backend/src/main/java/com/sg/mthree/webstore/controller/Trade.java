@@ -52,7 +52,7 @@ public class Trade {
         convert = new Converter();
     }
 
-    @GetMapping("/prefill/paymentmethod")
+    @GetMapping("/prefill/paymentMethod")
     public ResponseEntity<CustomerPaymentSummary> prefillPaymentMethod(int customerId){
         CustomerPaymentSummary cps = convert.toCustomerPaymentSummary(customerId);
         if(cps == null) {
@@ -65,7 +65,7 @@ public class Trade {
         }
     }
 
-    @GetMapping("/allorders")
+    @GetMapping("/allOrders")
     public ResponseEntity<List<CustomerOrder>> findAllOrder(@RequestParam("customerid") int customerId) {
         if(!customerDB.existsById(customerId)) {
             return ResponseEntity.badRequest()
@@ -77,7 +77,7 @@ public class Trade {
         }
     }
 
-    @PostMapping("/placeorder")
+    @PostMapping("/placeOrder")
     public ResponseEntity<String> placeOrder(@RequestParam("productids") int productId,
                                               @RequestParam("quantity") int quantity,
                                               @RequestParam("paymentmethodid") int paymentMethodId){
@@ -106,7 +106,7 @@ public class Trade {
         }
     }
 
-    @DeleteMapping("/deleteorder/{orderId}")
+    @DeleteMapping("/deleteOrder/{orderId}")
     public ResponseEntity<String> deleteOrder(@RequestParam int orderId){
         if(!customerOrderDB.existsById(orderId)) {
             return ResponseEntity.badRequest()

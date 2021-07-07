@@ -50,7 +50,7 @@ public class Signup {
         }
     }
 
-    @GetMapping("/admin/getuserlist")
+    @GetMapping("/admin/getUserList")
     public ResponseEntity<List<User>> getUserList(@RequestParam("adminid") int userId) {
         if(!userDB.isAdmin(userId)) {
             return ResponseEntity.badRequest()
