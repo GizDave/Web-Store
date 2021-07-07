@@ -4,22 +4,22 @@
       <nav class="justify-between mx-auto md:text md:text-xl">
         <ul class="flex justify-between min-w-full">
          <li class="flex-auto px-5 font-semibold lowercase md:px-10">
-            <a href="/">home</a>
+            <nuxt-link to="/">home</nuxt-link>
          </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
               <div class="relative group">
-                 <a href="/products">products</a> 
+                 <nuxt-link to="/products">products</nuxt-link> 
                  <div class="absolute hidden group-hover:block">
                      <ul class="top-0 block px-3 pb-1 bg-white rounded-lg bg-opacity-95">
                          <li class="opacity-50 hover:opacity-100">
-                             <a href="/products/keyboards">keyboards</a>
+                             <nuxt-link to="/products/keyboards">keyboards</nuxt-link>
 
                          </li>
                          <li class="opacity-50 hover:opacity-100">
-                             <a href="/products/keycaps">keycaps</a>
+                             <nuxt-link to="/products/keycaps">keycaps</nuxt-link>
                          </li>
                          <li class="opacity-50 hover:opacity-100">
-                             <a href="/products/deskmats">deskmats</a>
+                             <nuxt-link to="/products/deskmats">deskmats</nuxt-link>
                          </li>
                      </ul>
                  </div>
@@ -27,10 +27,10 @@
               </div>
           </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
-            <a href="/cart">cart</a>
+            <nuxt-link to="/cart">cart</nuxt-link>
           </li>
           <li class="flex-auto px-5 font-semibold lowercase md:px-10">
-            <a href="/account">account</a>
+            <nuxt-link to="/account_options">account</nuxt-link>
           </li>
         </ul>
       </nav>
