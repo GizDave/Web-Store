@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @EqualsAndHashCode
 @Entity(name = "Products")
-public class Product {
+public class Product implements Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productid;
@@ -27,4 +27,15 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "categoryid")
     private Category category;
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof Product){
+            Product temp = (Product) o;
+            return this.name.compareTo(temp.getName());
+        }
+        else {
+            return -1;
+        }
+    }
 }

@@ -29,7 +29,6 @@ public class Converter {
 
     public List<ProductSummary> productToThumbnail(List<Product> products){
         List<ProductSummary> buffer = new ArrayList<>();
-        List<Image> tempI = null;
 
         for(Product p: products) {
             ProductSummary tn = new ProductSummary();
@@ -38,6 +37,7 @@ public class Converter {
             tn.setInstock(stockDB.existsById(stockDB.findByProductId(p.getProductid())));
             tn.setPrice(p.getPrice());
             tn.setDescription(p.getDescription());
+            tn.setThumbnail(p.getThumbnail());
             tn.setImages(imageDB.findByProductId(p.getProductid()));
 
             buffer.add(tn);
@@ -58,7 +58,7 @@ public class Converter {
             cps.setFirst_name(c.get().getFirst_name());
             cps.setLast_name(c.get().getLast_name());
             cps.setPhone(c.get().getPhone());
-            cps.setAddress(customerAddressDB.findAddressByCustomerId(customerId));
+            cps.setAddress(customerAddressDB.getAddressByCustomerId(customerId));
             cps.setPayment(customerPaymentDB.findByCustomerId(customerId));
             return cps;
         }

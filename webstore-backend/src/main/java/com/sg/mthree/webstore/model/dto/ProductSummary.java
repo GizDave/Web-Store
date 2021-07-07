@@ -15,5 +15,6 @@ public class ProductSummary {
     private boolean instock;
     private float price;
     private String description;
+    private String thumbnail;
     private List<Image> images;
 }

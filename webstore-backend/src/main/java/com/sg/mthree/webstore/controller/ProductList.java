@@ -65,22 +65,22 @@ public class ProductList {
         convert = new Converter();
     }
 
-    @GetMapping("/pageNumber")
+    @GetMapping("/pageNumber/get")
     public int getPageNumber(){return pageNumber+1;}
-    @GetMapping("/maxPageNumber")
+    @GetMapping("/maxPageNumber/get")
     public int getMaxPageNumber(){return (int) Math.ceil(totalCount/itemCount);}
-    @GetMapping("/itemCount")
+    @GetMapping("/itemCount/get")
     public int getItemCount(){return itemCount;}
-    @GetMapping("/displayOrder")
+    @GetMapping("/displayOrder/get")
     public String getDisplayOrder(){return displayOrder;}
-    @GetMapping("/availableItemCounts")
+    @GetMapping("/availableItemCounts/get")
     public List<Integer> getItemCountOption(){return itemCountOption;}
-    @GetMapping("/availableDisplayOrders")
+    @GetMapping("/availableDisplayOrders/get")
     public List<String> getDisplayOrderOption(){return displayOrderOption;}
-    @GetMapping("/categories")
+    @GetMapping("/categories/get")
     public List<Category> getCategories(){return categoryOption;}
 
-    @PutMapping("/pageNumber/{newPageNumber}")
+    @PutMapping("/pageNumber/set/{newPageNumber}")
     public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
         if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
             this.pageNumber = pageNumber;
@@ -92,7 +92,7 @@ public class ProductList {
                     .body(null);
         }
     }
-    @PutMapping("/itemCount/{itemCountIndex}")
+    @PutMapping("/itemCount/set/{itemCountIndex}")
     public ResponseEntity<List<ProductSummary>> setItemCount(@RequestParam int itemCountIndex) {
         if(itemCountIndex >= 0 && itemCountIndex < itemCountOption.size()) {
             this.itemCount = itemCountOption.get(itemCountIndex);
@@ -104,7 +104,7 @@ public class ProductList {
                     .body(null);
         }
     }
-    @PutMapping("/displayOrder/{displayOrderIndex}")
+    @PutMapping("/displayOrder/set/{displayOrderIndex}")
     public ResponseEntity<List<ProductSummary>> setDisplayOrder(@RequestParam int displayOrderIndex){
         if(displayOrderIndex >= 0 && displayOrderIndex < itemCountOption.size()) {
             this.displayOrder = displayOrderOption.get(displayOrderIndex);
@@ -116,7 +116,7 @@ public class ProductList {
                     .body(null);
         }
     }
-    @PutMapping("/categories/{categoryIndex}")
+    @PutMapping("/categories/set/{categoryIndex}")
     public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam String categoryName) {
         Category temp = categoryDB.getCategoryByName(categoryName);
         if(temp != null) {
@@ -172,10 +172,8 @@ public class ProductList {
 
         if(query != null) {
             if(query.length() > 0) {
-                tempP = productDB.findByName(
-                        query,
-                        Sort.by(displayOrderOptionMap.get(displayOrder), "name")
-                );
+                tempP = productDB.findByName(query);
+                Collections.sort(tempP);
             }
             else {
                 return;

@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CustomerAddressRepository extends JpaRepository<CustomerAddressBridge,Integer> {
     @Query("SELECT cab.Address FROM CustomerAddressBridge cab WHERE cab.customerid = ?1")
-    Address findAddressByCustomerId(int customerid);
+    Address getAddressByCustomerId(int customerid);
 }

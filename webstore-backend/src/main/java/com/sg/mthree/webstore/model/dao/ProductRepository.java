@@ -12,8 +12,8 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     @Query(value = "SELECT p FROM Product p WHERE p.productid IN (SELECT productid FROM Customer_Order_Product_Bridge GROUP BY productid SORT BY SUM(quantity) DESC LIMIT ?1)", nativeQuery = true)
     List<Product> findByPopularity(int num_product);
 
-    @Query("SELECT p FROM Product p WHERE p.name LIKE ?1%")
-    List<Product> findByName(String query, Sort sort);
+    @Query(value = "SELECT p FROM Product p WHERE p.name LIKE ?1%", nativeQuery = true)
+    List<Product> findByName(String query);
 
     @Query("SELECT p FROM Product p WHERE p.categoryid = ?1")
     List<Product> findByCategoryId(int categoryId, Sort sort);

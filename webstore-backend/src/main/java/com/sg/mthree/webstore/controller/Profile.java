@@ -26,7 +26,7 @@ public class Profile {
     @Autowired
     private CustomerPaymentRepository customerPaymentDB;
 
-    @GetMapping("/basic/{customerId}")
+    @GetMapping("/basic/get/{customerId}")
     public ResponseEntity<Customer> getBasicInformation(@RequestParam int customerId){
         Optional<Customer> c = customerDB.findById(customerId);
         if(!c.isPresent()) {
@@ -39,7 +39,7 @@ public class Profile {
         }
     }
 
-    @GetMapping("/paymentInformation/{customerId}")
+    @GetMapping("/paymentInformation/get/{customerId}")
     public ResponseEntity<List<CustomerPayment>> getPaymentInformation(@RequestParam int customerId){
         Optional<List<CustomerPayment>> cp = Optional.ofNullable(customerPaymentDB.findByCustomerId(customerId));
         if(!cp.isPresent()) {
@@ -52,7 +52,7 @@ public class Profile {
         }
     }
 
-    @GetMapping("/securityInformation/{customerId}")
+    @GetMapping("/securityInformation/get/{customerId}")
     public ResponseEntity<User> getSecurityInformation(@RequestParam int customerId){
         Optional<Customer> c = customerDB.findById(customerId);
         if(!c.isPresent()){
