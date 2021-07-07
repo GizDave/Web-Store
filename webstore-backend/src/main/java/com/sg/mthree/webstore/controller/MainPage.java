@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/main")
@@ -22,16 +23,22 @@ public class MainPage {
     @Autowired
     private ImageRepository imageDB;
 
+    @Autowired
     private Converter convert;
-
-    public MainPage() {
-        convert = new Converter();
-    }
 
     @GetMapping("/featuredProducts")
     public List<ProductSummary> getFeaturedProducts(){
-        List<Product> tempP = productDB.findByPopularity(5);
+        int j;
+        Random rand = new Random();
+        List<Product> tempAgg = productDB.findAll();
+        List<Product> tempP = new ArrayList<>();
         List<ProductSummary> buffer = new ArrayList<>();
+
+        for(int i = 0; i < 5; i++) {
+            j = rand.nextInt(tempAgg.size());
+            tempP.add(tempAgg.remove(j));
+        }
+
         return convert.productToThumbnail(tempP, buffer);
     }
 }

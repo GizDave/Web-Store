@@ -4,18 +4,19 @@ import main.java.com.sg.mthree.webstore.model.dao.CategoryRepository;
 import main.java.com.sg.mthree.webstore.model.dao.ImageRepository;
 import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
 import main.java.com.sg.mthree.webstore.model.dto.Category;
-import main.java.com.sg.mthree.webstore.model.dto.Image;
 import main.java.com.sg.mthree.webstore.model.dto.Product;
 import main.java.com.sg.mthree.webstore.model.dto.ProductSummary;
 import main.java.com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("/productlist")
@@ -76,6 +77,13 @@ public class ProductList {
     public List<String> getDisplayOrderOption(){return displayOrderOption;}
     @GetMapping("/categories/get")
     public List<Category> getCategories(){return categoryOption;}
+    @GetMapping("/products/get/all")
+    public List<ProductSummary> getAllProducts(){
+        List<Product> tempAgg = productDB.findAll();
+        List<ProductSummary> buffer = new ArrayList<>();
+        return convert.productToThumbnail(tempAgg, buffer);
+    }
+
 
     @PutMapping("/pageNumber/set/{newPageNumber}")
     public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
@@ -163,10 +171,8 @@ public class ProductList {
     }
 
     private void refreshBuffer(String query){
-        System.out.println(buffer.size());
         buffer.clear();
         List<Product> tempP = null;
-        List<Image> tempI = null;
 
         if(query != null) {
             if(query.length() > 0) {
@@ -178,13 +184,6 @@ public class ProductList {
         }
         else {
             tempP = productDB.findByCategoryId(category.getCategoryid());
-            System.out.println(category.getName());
-            System.out.println(tempP == null);
-            if(tempP != null){
-                for(Product p: tempP) {
-                    System.out.println(p.getName());
-                }
-            }
         }
 
         Collections.sort(tempP);
@@ -194,7 +193,6 @@ public class ProductList {
 
         convert.productToThumbnail(tempP, buffer);
         totalCount = buffer.size();
-        System.out.println(buffer.size());
     }
 
     private List<ProductSummary> refreshPage() {

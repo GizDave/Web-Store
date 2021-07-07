@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
-    @Query("SELECT c FROM Categories c") // prone to duplication
+    @Query("SELECT c FROM Categories c")
     List<Category> findAll();
 
     @Query(value = "SELECT c FROM Categories c WHERE c.name = ?1", nativeQuery = true)
