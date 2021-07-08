@@ -33,6 +33,7 @@ public class ProductList {
     private int pageNumber;
     private int itemCount;
     private int totalCount;
+    private int maxPageNumber;
     private String displayOrder;
     private Category category;
 
@@ -66,7 +67,7 @@ public class ProductList {
     @GetMapping("/pageNumber/get")
     public int getPageNumber(){return pageNumber+1;}
     @GetMapping("/maxPageNumber/get")
-    public int getMaxPageNumber(){return (int) Math.ceil(totalCount/itemCount) + 1;}
+    public int getMaxPageNumber(){return maxPageNumber;}
     @GetMapping("/itemCount/get")
     public int getItemCount(){return itemCount;}
     @GetMapping("/category/get")
@@ -86,11 +87,10 @@ public class ProductList {
         return convert.productToThumbnail(tempAgg, buffer);
     }
 
-
     @PutMapping("/pageNumber/set/{newPageNumber}")
     public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
-        if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
-            this.pageNumber = newPageNumber;
+        if(newPageNumber > 0 && newPageNumber-1 <= maxPageNumber) {
+            this.pageNumber = newPageNumber-1;
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
         }
@@ -114,6 +114,10 @@ public class ProductList {
     @PutMapping("/displayOrder/set/{displayOrderIndex}")
     public ResponseEntity<List<ProductSummary>> setDisplayOrder(@RequestParam int displayOrderIndex){
         if(displayOrderIndex >= 0 && displayOrderIndex < displayOrderOption.size()) {
+            if(this.displayOrder != displayOrderOption.get(displayOrderIndex) &&
+                    (this.displayOrder.equals("Descending") || displayOrderOption.get(displayOrderIndex).equals("Descending"))) {
+                this.pageNumber = 0;
+            }
             this.displayOrder = displayOrderOption.get(displayOrderIndex);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
@@ -140,7 +144,7 @@ public class ProductList {
 
     @GetMapping("/nextPage")
     public ResponseEntity<List<ProductSummary>> nextPage() {
-        if(itemCount * (pageNumber + 1) > totalCount) {
+        if(pageNumber + 1 < maxPageNumber) {
             pageNumber += 1;
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
@@ -153,7 +157,7 @@ public class ProductList {
 
     @GetMapping("/previousPage")
     public ResponseEntity<List<ProductSummary>> prevPage() {
-        if(pageNumber - 1 < 1){
+        if(pageNumber - 1 < 0){
             pageNumber -= 1;
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
@@ -195,6 +199,7 @@ public class ProductList {
 
         convert.productToThumbnail(tempP, buffer);
         totalCount = buffer.size();
+        maxPageNumber = (int) Math.ceil(totalCount/itemCount) + 1;
     }
 
     private List<ProductSummary> refreshPage() {
