@@ -32,21 +32,21 @@ public class Converter {
         System.out.println("convert():");
         for(Product p: products) {
             ProductSummary tn = new ProductSummary();
-            System.out.println(p.getProductid()); //
+            //System.out.println(p.getProductid()); //
             tn.setProductid(p.getProductid());
-            System.out.println(p.getName()); //
+            //System.out.println(p.getName()); //
             tn.setName(p.getName());
             tn.setInstock(stockDB.hasStock(p.getProductid()));
-            System.out.println(tn.getInstock()); //
-            System.out.println(p.getPrice()); //
+            //System.out.println(tn.getInstock()); //
+            //System.out.println(p.getPrice()); //
             tn.setPrice(p.getPrice());
-            System.out.println(p.getDescription()); //
+            //System.out.println(p.getDescription()); //
             tn.setDescription(p.getDescription());
-            System.out.println(p.getThumbnail()); //
+            //System.out.println(p.getThumbnail()); //
             tn.setThumbnail(p.getThumbnail());
             tn.setImages(imageDB.findByProductId(p.getProductid()));
-            System.out.println(tn.getImages().size()); //
-            System.out.println("-------------------"); //
+            //System.out.println(tn.getImages().size()); //
+            //System.out.println("-------------------"); //
 
             buffer.add(tn);
         }

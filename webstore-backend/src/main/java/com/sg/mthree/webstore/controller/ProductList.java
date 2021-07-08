@@ -87,9 +87,9 @@ public class ProductList {
         return convert.productToThumbnail(tempAgg, buffer);
     }
 
-    @PutMapping("/pageNumber/set/{newPageNumber}")
+    @PutMapping("/pageNumber/set")
     public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
-        if(newPageNumber > 0 && newPageNumber-1 <= maxPageNumber) {
+        if(newPageNumber > 0 && newPageNumber <= maxPageNumber) {
             this.pageNumber = newPageNumber-1;
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
@@ -99,10 +99,12 @@ public class ProductList {
                     .body(null);
         }
     }
-    @PutMapping("/itemCount/set/{itemCountIndex}")
+    @PutMapping("/itemCount/set")
     public ResponseEntity<List<ProductSummary>> setItemCount(@RequestParam int itemCountIndex) {
         if(itemCountIndex >= 0 && itemCountIndex < itemCountOption.size()) {
+            this.pageNumber = 0;
             this.itemCount = itemCountOption.get(itemCountIndex);
+            this.maxPageNumber = (int) Math.ceil(totalCount/itemCount) + 1;
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
         }
@@ -111,12 +113,13 @@ public class ProductList {
                     .body(null);
         }
     }
-    @PutMapping("/displayOrder/set/{displayOrderIndex}")
+    @PutMapping("/displayOrder/set")
     public ResponseEntity<List<ProductSummary>> setDisplayOrder(@RequestParam int displayOrderIndex){
         if(displayOrderIndex >= 0 && displayOrderIndex < displayOrderOption.size()) {
             if(this.displayOrder != displayOrderOption.get(displayOrderIndex) &&
                     (this.displayOrder.equals("Descending") || displayOrderOption.get(displayOrderIndex).equals("Descending"))) {
                 this.pageNumber = 0;
+                Collections.reverse(buffer);
             }
             this.displayOrder = displayOrderOption.get(displayOrderIndex);
             return ResponseEntity.status(HttpStatus.OK)
@@ -127,11 +130,10 @@ public class ProductList {
                     .body(null);
         }
     }
-    @PutMapping("/categories/set/{categoryIndex}")
-    public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam String categoryName) {
-        Category temp = categoryDB.getCategoryByName(categoryName).get(0);
-        if(temp != null) {
-            this.category = temp;
+    @PutMapping("/categories/set")
+    public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam int categoryIndex) {
+        if(categoryIndex >= 0 && categoryIndex < categoryOption.size()) {
+            this.category = categoryOption.get(categoryIndex);
             refreshBuffer(null);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
@@ -168,7 +170,7 @@ public class ProductList {
         }
     }
 
-    @GetMapping("/search/{query}")
+    @GetMapping("/search")
     public ResponseEntity<List<ProductSummary>> search(@RequestParam String query) {
         pageNumber = 0;
         refreshBuffer(query);
@@ -182,7 +184,7 @@ public class ProductList {
 
         if(query != null) {
             if(query.length() > 0) {
-                tempP = productDB.findByName(query);
+                tempP = productDB.findByName(query, category.getCategoryid());
             }
             else {
                 return;
