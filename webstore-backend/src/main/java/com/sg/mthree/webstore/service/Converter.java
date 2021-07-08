@@ -5,6 +5,7 @@ import main.java.com.sg.mthree.webstore.model.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ public class Converter {
 
     @Autowired
     private CustomerRepository customerDB;
+
+    @Autowired
+    private AddressRepository addressDB;
 
     @Autowired
     private CustomerAddressRepository customerAddressDB;
@@ -66,7 +70,16 @@ public class Converter {
             cps.setFirst_name(c.get().getFirst_name());
             cps.setLast_name(c.get().getLast_name());
             cps.setPhone(c.get().getPhone());
-            cps.setAddress(customerAddressDB.getAddressByCustomerId(customerId).get(0));
+
+            List<Integer> tempId = customerAddressDB.getAddressIdByCustomerId(customerId);
+            if(tempId.size() > 0) {
+                Integer addressId = tempId.get(0);
+                Optional<Address> address = addressDB.findById(addressId);
+
+                if(address.isPresent()) {
+                    cps.setAddress(address.get());
+                }
+            }
             cps.setPayment(customerPaymentDB.findByCustomerId(customerId));
             return cps;
         }

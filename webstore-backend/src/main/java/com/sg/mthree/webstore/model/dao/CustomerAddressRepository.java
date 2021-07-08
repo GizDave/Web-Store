@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface CustomerAddressRepository extends JpaRepository<CustomerAddressBridge, CustomerAddressBridgeId> {
-    @Query(value = "SELECT cab.Address FROM Customer_Address_Bridge cab WHERE cab.customerid = ?1", nativeQuery = true)
-    List<Address> getAddressByCustomerId(int customerid);
+    @Query(value = "SELECT cab.addressid FROM customeraddressbridge cab WHERE cab.customerid = ?1")
+    List<Integer> getAddressIdByCustomerId(int customerid);
 }

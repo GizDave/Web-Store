@@ -37,15 +37,15 @@ public class Trade {
     private Converter convert;
 
     @GetMapping("/customerid/get")
-    public ResponseEntity<CustomerPayment> getCustomer(@RequestParam int userId) {
-        Optional<List<Integer>> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
-        if(!customerId.isPresent()) {
+    public ResponseEntity<Integer> getCustomerId(@RequestParam int userId) {
+        Optional<List<Integer>> customerId = Optional.ofNullable(customerDB.findCustomerIdByUserId(userId));
+        if(!customerId.isPresent() || customerId.get().size() == 0) {
             return ResponseEntity.badRequest()
                     .body(null);
         }
         else {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(customerPaymentDB.findById(customerId.get().get(0)).get());
+                    .body(customerId.get().get(0));
         }
     }
 
@@ -78,7 +78,11 @@ public class Trade {
     public ResponseEntity<String> placeOrder(@RequestParam int productId,
                                              @RequestParam int quantity,
                                              @RequestParam int paymentMethodId){
-        if(!customerPaymentDB.existsById(paymentMethodId)) {
+        if(quantity <= 0) {
+            return ResponseEntity.badRequest()
+                    .body("Quantity cannot be less than 1.");
+        }
+        else if(!customerPaymentDB.existsById(paymentMethodId)) {
             return ResponseEntity.badRequest()
                     .body("Payment method does not exist.");
         }
@@ -89,11 +93,11 @@ public class Trade {
                         .body("Product does not exist.");
             }
 
-            CustomerPayment cp = customerPaymentDB.getById(paymentMethodId);
+            CustomerPayment cp = customerPaymentDB.findById(paymentMethodId).get();
 
             CustomerOrder newOrder = new CustomerOrder();
-            newOrder.setPaymentmethodid(cp.getPaymentmethodid());
-            newOrder.setCustomerid(cp.getCustomerid());
+            newOrder.setCustomerPayment(cp);
+            newOrder.setCustomer(customerDB.findById(cp.getCustomerid()).get());
             newOrder.setDate_ordered(LocalDateTime.now());
             newOrder.setTotal_price(p.get().getPrice() * quantity);
             newOrder = customerOrderDB.save(newOrder);
