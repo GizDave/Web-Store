@@ -6,49 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da02f934-d3f1-4b84-bc0b-7b9a7e987eaa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/WebStoreApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/WebStoreApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/controller/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/ProductList.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/controller/ProductList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/controller/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Signin.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/controller/Signin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Signup.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/controller/Signup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/controller/Trade.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/controller/Trade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/AddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/AddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/CategoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerAddressRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/CustomerAddressRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerOrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/CustomerOrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerPaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/CustomerPaymentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/CustomerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/ImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/ImageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/StockRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/StockRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dao/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dao/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerAddressBridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/CustomerAddressBridge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerAddressBridgeId.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/CustomerAddressBridgeId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/CustomerOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerOrderProductBridge.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/CustomerOrderProductBridge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerOrderProductBridgeId.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/CustomerOrderProductBridgeId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/CustomerPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/CustomerPaymentSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/CustomerPaymentSummary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/Image.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/ProductSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/ProductSummary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/model/dto/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/model/dto/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/java/com/sg/mthree/webstore/service/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/java/main/java/com/sg/mthree/webstore/service/Converter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/test/java/com/sg/mthree/webstore/WebStoreApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/test/java/main/java/com/sg/mthree/webstore/WebStoreApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstore-backend/src/test/java/com/sg/mthree/webstore/controller/ProductListTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/webstore-backend/src/test/java/main/java/com/sg/mthree/webstore/controller/ProductListTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webstoredb_sampledata.sql" beforeDir="false" afterPath="$PROJECT_DIR$/webstoredb_sampledata.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webstoredb.sql" beforeDir="false" afterPath="$PROJECT_DIR$/webstoredb.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +31,22 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Inspector" value="true" />
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Inspector" value="false" />
+        <entry key="JPA Palette" value="false" />
+        <entry key="JPA Structure" value="false" />
+      </map>
+    </option>
   </component>
   <component name="ProjectId" id="1ulKrgcEnrcO4Lxh8Qqwlc0WeJP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />

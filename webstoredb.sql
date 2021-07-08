@@ -1,6 +1,6 @@
-drop database if exists webstoredb;
-create database webstoredb;
-use webstoredb;
+drop database if exists webstoredbtest;
+create database webstoredbtest;
+use webstoredbtest;
 
 create table Categories (
 	categoryid		int				primary key			auto_increment,
