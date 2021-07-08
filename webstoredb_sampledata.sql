@@ -2,7 +2,8 @@ use webstoredb;
 
 insert into Users (username, password, isadmin) values
 ("imadmin", "123456", true),
-("imuser", "123456", false);
+("imuser1", "123456", false),
+("imuser2", "123456", false);
 
 insert into Categories (name) values 
 ("A"),
@@ -27,4 +28,8 @@ insert into Stock (productid, instock, quantity) values
 
 insert into Customers (userid, first_name, last_name, phone, email) values 
 (1, "im", "admin", "1234567890", "im.admin@mthree.com"), 
-(2, "im", "user", "0000000000", "im.user@mthree.com");
+(2, "im", "user1", "0000000000", "im.user1@mthree.com"), 
+(3, "im", "user2", "0000000000", "im.user2@mthree.com");
+
+insert into Customer_Payments (customerid, card_number) values 
+(2, 4673763931227905);

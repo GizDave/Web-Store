@@ -13,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/productlist")
@@ -80,6 +77,23 @@ public class ProductList {
     public List<String> getDisplayOrderOption(){return displayOrderOption;}
     @GetMapping("/availableCategoryOption/get")
     public List<Category> getCategories(){return categoryOption;}
+    @GetMapping("/products/get")
+    public ResponseEntity<ProductSummary> getProductById(@RequestParam int productId){
+        Optional<Product> product = productDB.findById(productId);
+        if(product.isPresent()) {
+            List<Product> tempP = new ArrayList<>();
+            List<ProductSummary> tempBuffer = new ArrayList<>();
+
+            tempP.add(product.get());
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(convert.productToThumbnail(tempP, tempBuffer).get(0));
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
     @GetMapping("/products/get/all")
     public List<ProductSummary> getAllProducts(){
         List<Product> tempAgg = productDB.findAll();

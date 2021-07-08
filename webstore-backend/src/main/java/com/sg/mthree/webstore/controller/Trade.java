@@ -36,8 +36,8 @@ public class Trade {
     @Autowired
     private Converter convert;
 
-    @GetMapping("/prefill/{userId}")
-    public ResponseEntity<CustomerPayment> getCustomer(@RequestParam("customerid") int userId) {
+    @GetMapping("/customerid/get")
+    public ResponseEntity<CustomerPayment> getCustomer(@RequestParam int userId) {
         Optional<List<Integer>> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
         if(!customerId.isPresent()) {
             return ResponseEntity.badRequest()
@@ -49,8 +49,8 @@ public class Trade {
         }
     }
 
-    @GetMapping("/prefill/paymentMethod")
-    public ResponseEntity<CustomerPaymentSummary> prefillPaymentMethod(int customerId){
+    @GetMapping("/prefill")
+    public ResponseEntity<CustomerPaymentSummary> prefillPaymentMethod(@RequestParam int customerId){
         CustomerPaymentSummary cps = convert.toCustomerPaymentSummary(customerId);
         if(cps == null) {
             return ResponseEntity.badRequest()
@@ -63,7 +63,7 @@ public class Trade {
     }
 
     @GetMapping("/allOrders")
-    public ResponseEntity<List<CustomerOrder>> findAllOrder(@RequestParam("customerid") int customerId) {
+    public ResponseEntity<List<CustomerOrder>> findAllOrder(@RequestParam int customerId) {
         if(!customerDB.existsById(customerId)) {
             return ResponseEntity.badRequest()
                     .body(null);
@@ -75,9 +75,9 @@ public class Trade {
     }
 
     @PostMapping("/placeOrder")
-    public ResponseEntity<String> placeOrder(@RequestParam("productids") int productId,
-                                              @RequestParam("quantity") int quantity,
-                                              @RequestParam("paymentmethodid") int paymentMethodId){
+    public ResponseEntity<String> placeOrder(@RequestParam int productId,
+                                             @RequestParam int quantity,
+                                             @RequestParam int paymentMethodId){
         if(!customerPaymentDB.existsById(paymentMethodId)) {
             return ResponseEntity.badRequest()
                     .body("Payment method does not exist.");
@@ -103,7 +103,7 @@ public class Trade {
         }
     }
 
-    @DeleteMapping("/deleteOrder/{orderId}")
+    @DeleteMapping("/deleteOrder")
     public ResponseEntity<String> deleteOrder(@RequestParam int orderId){
         if(!customerOrderDB.existsById(orderId)) {
             return ResponseEntity.badRequest()
