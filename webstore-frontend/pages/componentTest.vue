@@ -1,6 +1,7 @@
 <template>
   <div>
-      <AddProduct/>
+      <NavBar/>
+      <Login/>
   </div>
 </template>
 
