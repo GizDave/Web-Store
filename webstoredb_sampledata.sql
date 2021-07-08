@@ -26,5 +26,5 @@ insert into Stock (productid, instock, quantity) values
 (6, true, 100);
 
 insert into Customers (userid, first_name, last_name, phone, email) values 
-(1, "im", "admin", "1234567890", "im.admin@mthree.com")
+(1, "im", "admin", "1234567890", "im.admin@mthree.com"), 
 (2, "im", "user", "0000000000", "im.user@mthree.com");

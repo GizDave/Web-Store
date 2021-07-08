@@ -20,16 +20,17 @@ public class Signup {
     private final int min_password_len = 6;
     private final int max_password_len = 20;
 
-    @PostMapping("/signup")
-    public ResponseEntity<String> register(@RequestParam(name = "username") String username,
-                                           @RequestParam(name = "password") String password) {
-        if(userDB.existsByUsername(username)) {
+    @PostMapping
+    public ResponseEntity<String> register(@RequestParam String username,
+                                           @RequestParam String password) {
+        // no cleaning punctuations
+        username = username.trim();
+        password = password.trim();
+        if(userDB.existsByUsername(username) ) {
             return ResponseEntity.badRequest()
                     .body("Username already exists. Choose another one.");
         }
         else {
-            username = username.trim();
-            password = password.trim();
             if(username.length() < min_username_len || username.length() > max_username_len) {
                 return ResponseEntity.badRequest()
                         .body(String.format("Username (after trimming spaces) must be within the length of %d and %d, inclusively.",
@@ -51,14 +52,14 @@ public class Signup {
     }
 
     @GetMapping("/admin/getUserList")
-    public ResponseEntity<List<User>> getUserList(@RequestParam("adminid") int userId) {
-        if(!userDB.isAdmin(userId)) {
-            return ResponseEntity.badRequest()
-                    .body(null);
+    public ResponseEntity<List<User>> getUserList(@RequestParam int userId) {
+        if (userDB.existsById(userId) && userDB.findById(userId).get().isAdmin()){
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(userDB.findAll());
         }
         else {
             return ResponseEntity.badRequest()
-                    .body(userDB.findAll());
+                    .body(null);
         }
     }
 }

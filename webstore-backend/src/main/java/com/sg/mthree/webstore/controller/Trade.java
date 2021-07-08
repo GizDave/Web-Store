@@ -33,6 +33,9 @@ public class Trade {
     @Autowired
     private ProductRepository productDB;
 
+    @Autowired
+    private Converter convert;
+
     @GetMapping("/prefill/{userId}")
     public ResponseEntity<CustomerPayment> getCustomer(@RequestParam("customerid") int userId) {
         Optional<List<Integer>> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
@@ -44,12 +47,6 @@ public class Trade {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(customerPaymentDB.findById(customerId.get().get(0)).get());
         }
-    }
-
-    private Converter convert;
-
-    public Trade() {
-        convert = new Converter();
     }
 
     @GetMapping("/prefill/paymentMethod")

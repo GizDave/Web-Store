@@ -18,5 +18,9 @@ public class User {
     @Column(name = "password")
     private String password;
     @Column(name = "isadmin")
-    private boolean admin;
+    private boolean isadmin;
+
+    public boolean isAdmin() {
+        return isadmin;
+    }
 }

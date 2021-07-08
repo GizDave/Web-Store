@@ -12,9 +12,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT CASE WHEN u.password = ?2 THEN u.userid ELSE NULL END FROM Users u WHERE u.username = ?1", nativeQuery = true)
     List<Integer> login(String username, String password);
 
-    @Query(value = "SELECT u.isadmin FROM Users u WHERE u.userid = ?1", nativeQuery = true)
-    Boolean isAdmin(int userId);
-
-    @Query(value = "SELECT COUNT(u.id)>0 FROM Users u", nativeQuery = true)
+    @Query("SELECT COUNT(u) > 0 FROM Users u WHERE u.username = ?1")
     Boolean existsByUsername(String username);
+
+    @Query("SELECT u FROM Users u")
+    List<User> findAll();
 }
