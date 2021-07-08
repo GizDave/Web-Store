@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "addressid")
+    @Column(name = "orderid")
     private int orderid;
     @Column(name = "paymentmethodid", insertable = false, updatable = false)
     private int paymentmethodid;

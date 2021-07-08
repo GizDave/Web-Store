@@ -33,3 +33,5 @@ insert into Customers (userid, first_name, last_name, phone, email) values
 
 insert into Customer_Payments (customerid, card_number) values 
 (2, 4673763931227905);
+
+select * from Customer_Orders;

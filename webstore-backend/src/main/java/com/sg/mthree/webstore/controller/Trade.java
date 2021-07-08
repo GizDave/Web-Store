@@ -94,7 +94,7 @@ public class Trade {
             }
 
             CustomerPayment cp = customerPaymentDB.findById(paymentMethodId).get();
-
+            System.out.println(cp.getCustomerid());
             CustomerOrder newOrder = new CustomerOrder();
             newOrder.setCustomerPayment(cp);
             newOrder.setCustomer(customerDB.findById(cp.getCustomerid()).get());

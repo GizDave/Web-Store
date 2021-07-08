@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface CustomerOrderRepository extends JpaRepository<CustomerOrder, Integer> {
-    @Query("SELECT co FROM customerorders co WHERE co.customerid = ?1")
+    @Query("SELECT co FROM Customer_Orders co WHERE co.customerid = ?1")
     List<CustomerOrder> findAllByCustomerid(int customerId);
 }
