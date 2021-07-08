@@ -1,11 +1,11 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.CustomerPaymentRepository;
-import main.java.com.sg.mthree.webstore.model.dao.CustomerRepository;
-import main.java.com.sg.mthree.webstore.model.dao.UserRepository;
-import main.java.com.sg.mthree.webstore.model.dto.Customer;
-import main.java.com.sg.mthree.webstore.model.dto.CustomerPayment;
-import main.java.com.sg.mthree.webstore.model.dto.User;
+import com.sg.mthree.webstore.model.dao.CustomerPaymentRepository;
+import com.sg.mthree.webstore.model.dao.CustomerRepository;
+import com.sg.mthree.webstore.model.dao.UserRepository;
+import com.sg.mthree.webstore.model.dto.Customer;
+import com.sg.mthree.webstore.model.dto.CustomerPayment;
+import com.sg.mthree.webstore.model.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/userprofile")
+@CrossOrigin(origins = "*")
 public class Profile {
     @Autowired
     private UserRepository userDB;

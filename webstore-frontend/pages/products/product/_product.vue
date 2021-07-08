@@ -1,12 +1,17 @@
 <template>
   <div>
-      <Product/>
+      <Product :productid="productId" />
   </div>
 </template>
 
 <script>
-export default {
 
+export default {
+  asyncData( {params} ) {  
+    return {  
+      productId: params.product,
+    }
+  },
 }
 </script>
 

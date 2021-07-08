@@ -1,4 +1,4 @@
-package main.java.com.sg.mthree.webstore.model.dto;
+package com.sg.mthree.webstore.model.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,4 +17,8 @@ public class ProductSummary {
     private String description;
     private String thumbnail;
     private List<Image> images;
+
+    public boolean getInstock() {
+        return instock;
+    }
 }

@@ -18,40 +18,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-for="product in cart" :key="product.id">
                             <td class="hidden pb-4 md:table-cell">
                                 <div class="w-20 h-20">
                                     <div class="relative overflow-hidden aspect-w-1 aspect-h-1">
-                                        <img src="../static/images/placeholder.jpeg" class="absolute object-cover w-20 h-20 rounded" alt="Thumbnail">
+                                        <img :src="product.product.thumbnail" class="absolute object-cover w-20 h-20 rounded" alt="Thumbnail">
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <nuxt-link to="#">
-                                    <p class="mb-2 md:ml-4">Placeholder Product</p>
+                                <nuxt-link :to="'/products/product/' + product.id">
+                                    <p class="mb-2 md:ml-4">{{product.product.name}}</p>
+                                </nuxt-link>
                                     <form action="" method="POST">
-                                        <button type="submit" class="text-gray-700 md:ml-4">
+                                        <button class="text-gray-700 md:ml-4" @click="removeFromCart(product)">
                                             <small>(Remove item)</small>
                                         </button>
                                     </form>
-                                </nuxt-link>
                             </td>
                             <td class="justify-center mt-6 md:justify-end md:flex">
                                 <div class="w-20 h-10">
                                     <div class="relative flex flex-row w-full h-8">
-                                        <input type="number" value="2" 
-                                        class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                                        <div class="w-full my-auto font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black">
+                                            {{product.quantity}}
+                                        </div>
                                     </div>
                                 </div>
                             </td>
                             <td class="hidden text-right md:table-cell">
                                 <span class="text-sm font-medium lg:text-base">
-                                $Price
+                                ${{product.product.price}}
                                 </span>
                             </td>
                             <td class="text-right">
                                 <span class="text-sm font-medium lg:text-base">
-                                $Total
+                                ${{product.total}}
                                 </span>
                             </td>
                         </tr>
@@ -75,13 +76,14 @@ export default {
     this.getCart();
   },
   methods: {
-    removeFromCart(productid) {
-      this.$store.commit('cart/remove', productid)
+    removeFromCart(product) {
+      console.log(product.id)
+      this.$store.commit('cart/remove', product)
     },
     getCart() {
       this.cart = this.$store.state.cart.list
     },
-  },
+  }
 }
 </script>
 

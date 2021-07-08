@@ -23,7 +23,7 @@
         />
       </svg>
 
-      Newer
+      Previous
     </nuxt-link>
 
     <div class="py-2 items center">
@@ -40,7 +40,7 @@
         'btn-disabled': currentPage >= totalPages
       }"
     >
-      Older
+      Next
       <div class="items-end">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ export default {
     },
     perPage: {
       type: Number,
-      default: 9
+      default: 6
     }
   },
   computed: {

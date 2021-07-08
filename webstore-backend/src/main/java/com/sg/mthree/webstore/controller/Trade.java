@@ -1,11 +1,11 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.*;
-import main.java.com.sg.mthree.webstore.model.dto.CustomerOrder;
-import main.java.com.sg.mthree.webstore.model.dto.CustomerPayment;
-import main.java.com.sg.mthree.webstore.model.dto.CustomerPaymentSummary;
-import main.java.com.sg.mthree.webstore.model.dto.Product;
-import main.java.com.sg.mthree.webstore.service.Converter;
+import com.sg.mthree.webstore.model.dao.*;
+import com.sg.mthree.webstore.model.dto.CustomerOrder;
+import com.sg.mthree.webstore.model.dto.CustomerPayment;
+import com.sg.mthree.webstore.model.dto.CustomerPaymentSummary;
+import com.sg.mthree.webstore.model.dto.Product;
+import com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/trade")
+@CrossOrigin(origins = "*")
 public class Trade {
     @Autowired
     private CustomerRepository customerDB;
@@ -35,14 +36,14 @@ public class Trade {
 
     @GetMapping("/prefill/{userId}")
     public ResponseEntity<CustomerPayment> getCustomer(@RequestParam("customerid") int userId) {
-        Optional<Integer> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
+        Optional<List<Integer>> customerId = Optional.ofNullable(customerDB.getCustomerIdByUserId(userId));
         if(!customerId.isPresent()) {
             return ResponseEntity.badRequest()
                     .body(null);
         }
         else {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(customerPaymentDB.findById(customerId.get()).get());
+                    .body(customerPaymentDB.findById(customerId.get().get(0)).get());
         }
     }
 

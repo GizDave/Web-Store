@@ -1,23 +1,23 @@
-package main.java.com.sg.mthree.webstore.controller;
+package com.sg.mthree.webstore.controller;
 
-import main.java.com.sg.mthree.webstore.model.dao.CategoryRepository;
-import main.java.com.sg.mthree.webstore.model.dao.ImageRepository;
-import main.java.com.sg.mthree.webstore.model.dao.ProductRepository;
-import main.java.com.sg.mthree.webstore.model.dto.Category;
-import main.java.com.sg.mthree.webstore.model.dto.Image;
-import main.java.com.sg.mthree.webstore.model.dto.Product;
-import main.java.com.sg.mthree.webstore.model.dto.ProductSummary;
-import main.java.com.sg.mthree.webstore.service.Converter;
+import com.sg.mthree.webstore.model.dao.CategoryRepository;
+import com.sg.mthree.webstore.model.dao.ImageRepository;
+import com.sg.mthree.webstore.model.dao.ProductRepository;
+import com.sg.mthree.webstore.model.dto.Category;
+import com.sg.mthree.webstore.model.dto.Product;
+import com.sg.mthree.webstore.model.dto.ProductSummary;
+import com.sg.mthree.webstore.service.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 
 @RestController
 @RequestMapping("/productlist")
+@CrossOrigin(origins = "*")
 public class ProductList {
     @Autowired
     private ProductRepository productDB;
@@ -38,52 +38,80 @@ public class ProductList {
     private List<Category> categoryOption;
     private List<Integer> itemCountOption;
     private List<String> displayOrderOption;
-    private Map<String, Sort.Direction> displayOrderOptionMap;
 
+    @Autowired
     private Converter convert;
 
-    public ProductList(){
-        Integer[] icOption = {10, 15, 20};
+    //@PostConstruct
+    private void setup(){
+        Integer[] icOption = {2, 3, 4};
         itemCountOption = Arrays.asList(icOption);
-        System.out.println("itemcountoption");
+
         String[] doOption = {"Ascending", "Descending", "None"};
         displayOrderOption = Arrays.asList(doOption);
-        displayOrderOptionMap = new HashMap<String, Sort.Direction>();
-        displayOrderOptionMap.put("Ascending", Sort.Direction.ASC);
-        displayOrderOptionMap.put("Descending", Sort.Direction.DESC);
-        displayOrderOptionMap.put("None", Sort.Direction.ASC); // default sort order
-        System.out.println("displayorderoptionmap");
+
         categoryOption = categoryDB.findAll();
-        System.out.println("categoryoption");
+
         pageNumber = 0;
         itemCount = itemCountOption.get(0);
         category = categoryOption.get(0);
         displayOrder = displayOrderOption.get(2);
-        System.out.println("basic stats");
+
+        buffer = new ArrayList<>();
         refreshBuffer(null);
-        System.out.println("refreshbuffer");
-        convert = new Converter();
     }
 
     @GetMapping("/pageNumber/get")
     public int getPageNumber(){return pageNumber+1;}
     @GetMapping("/maxPageNumber/get")
-    public int getMaxPageNumber(){return (int) Math.ceil(totalCount/itemCount);}
+    public int getMaxPageNumber(){return (int) Math.ceil(totalCount/itemCount) + 1;}
     @GetMapping("/itemCount/get")
     public int getItemCount(){return itemCount;}
+    @GetMapping("/category/get")
+    public Category getCategory(){return category;}
     @GetMapping("/displayOrder/get")
     public String getDisplayOrder(){return displayOrder;}
     @GetMapping("/availableItemCounts/get")
     public List<Integer> getItemCountOption(){return itemCountOption;}
     @GetMapping("/availableDisplayOrders/get")
     public List<String> getDisplayOrderOption(){return displayOrderOption;}
-    @GetMapping("/categories/get")
+    @GetMapping("/availableCategoryOption/get")
     public List<Category> getCategories(){return categoryOption;}
+    @GetMapping("/products/get/all")
+    public List<ProductSummary> getAllProducts(){
+        List<Product> tempAgg = productDB.findAll();
+        List<ProductSummary> buffer = new ArrayList<>();
+        return convert.productToThumbnail(tempAgg, buffer);
+    }
+    @GetMapping("/products/get/category/{categoryid}")
+    public List<ProductSummary> getAllProducts(@PathVariable("categoryid") int categoryId){
+        List<Product> tempAgg = productDB.findByCategoryId(categoryId);
+        List<ProductSummary> buffer = new ArrayList<>();
+        return convert.productToThumbnail(tempAgg, buffer);
+    }
+    @GetMapping("products/get/{id}")
+    public ResponseEntity<ProductSummary> getProductById(@PathVariable("id") int productId){
+        Optional<Product> product = productDB.findById(productId);
+        if(product.isPresent()) {
+            List<Product> tempP = new ArrayList<>();
+            List<ProductSummary> tempBuffer = new ArrayList<>();
+
+            tempP.add(product.get());
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(convert.productToThumbnail(tempP, tempBuffer).get(0));
+        }
+        else {
+            return ResponseEntity.badRequest()
+                    .body(null);
+        }
+    }
+
 
     @PutMapping("/pageNumber/set/{newPageNumber}")
     public ResponseEntity<List<ProductSummary>> setPageNumber(@RequestParam int newPageNumber) {
         if(newPageNumber > 0 && newPageNumber * itemCount <= totalCount) {
-            this.pageNumber = pageNumber;
+            this.pageNumber = newPageNumber;
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
         }
@@ -106,7 +134,7 @@ public class ProductList {
     }
     @PutMapping("/displayOrder/set/{displayOrderIndex}")
     public ResponseEntity<List<ProductSummary>> setDisplayOrder(@RequestParam int displayOrderIndex){
-        if(displayOrderIndex >= 0 && displayOrderIndex < itemCountOption.size()) {
+        if(displayOrderIndex >= 0 && displayOrderIndex < displayOrderOption.size()) {
             this.displayOrder = displayOrderOption.get(displayOrderIndex);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(refreshPage());
@@ -118,7 +146,7 @@ public class ProductList {
     }
     @PutMapping("/categories/set/{categoryIndex}")
     public ResponseEntity<List<ProductSummary>> setCategory(@RequestParam String categoryName) {
-        Category temp = categoryDB.getCategoryByName(categoryName);
+        Category temp = categoryDB.getCategoryByName(categoryName).get(0);
         if(temp != null) {
             this.category = temp;
             refreshBuffer(null);
@@ -166,27 +194,27 @@ public class ProductList {
     }
 
     private void refreshBuffer(String query){
-        buffer = new ArrayList<>();
+        buffer.clear();
         List<Product> tempP = null;
-        List<Image> tempI = null;
 
         if(query != null) {
             if(query.length() > 0) {
                 tempP = productDB.findByName(query);
-                Collections.sort(tempP);
             }
             else {
                 return;
             }
         }
         else {
-            tempP = productDB.findByCategoryId(
-                    category.getCategoryid(),
-                    Sort.by(displayOrderOptionMap.get(displayOrder), "name")
-            );
+            tempP = productDB.findByCategoryId(category.getCategoryid());
         }
 
-        buffer = convert.productToThumbnail(tempP);
+        Collections.sort(tempP);
+        if(displayOrder == "Descending"){
+            Collections.reverse(tempP);
+        }
+
+        convert.productToThumbnail(tempP, buffer);
         totalCount = buffer.size();
     }
 

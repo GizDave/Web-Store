@@ -1,4 +1,4 @@
-package main.java.com.sg.mthree.webstore.model.dto;
+package com.sg.mthree.webstore.model.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,16 +13,17 @@ import javax.persistence.*;
 public class Product implements Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productid")
     private int productid;
-    @Column
+    @Column(name = "name")
     private String name;
-    @Column
+    @Column(name = "description")
     private String description;
-    @Column(insertable = false, updatable = false)
+    @Column(name = "categoryid", insertable = false, updatable = false)
     private int categoryid;
-    @Column
+    @Column(name = "thumbnail")
     private String thumbnail;
-    @Column
+    @Column(name = "price")
     private float price;
     @ManyToOne
     @JoinColumn(name = "categoryid")

@@ -1,10 +1,9 @@
-package main.java.com.sg.mthree.webstore.model.dto;
+package com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -12,20 +11,19 @@ import java.util.Set;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customerid")
     private int customerid;
-    @Column(insertable = false, updatable = false)
+    @Column(name = "userid", insertable = false, updatable = false)
     private int userid;
-    @Column
+    @Column(name = "first_name")
     private String first_name;
-    @Column
+    @Column(name = "last_name")
     private String last_name;
-    @Column
+    @Column(name = "phone")
     private String phone;
-    @Column
+    @Column(name = "email")
     private String email;
     @ManyToOne
     @JoinColumn(name = "userid")
     private User user;
-    @OneToMany(mappedBy = "customer")
-    private Set<CustomerAddressBridge> customerAddressBridgeSet;
 }

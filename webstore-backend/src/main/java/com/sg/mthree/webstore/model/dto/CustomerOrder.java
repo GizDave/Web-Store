@@ -1,4 +1,4 @@
-package main.java.com.sg.mthree.webstore.model.dto;
+package com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -14,14 +13,15 @@ import java.util.Set;
 public class CustomerOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "addressid")
     private int orderid;
-    @Column(insertable = false, updatable = false)
+    @Column(name = "paymentmethodid", insertable = false, updatable = false)
     private int paymentmethodid;
-    @Column(insertable = false, updatable = false)
+    @Column(name = "customerid", insertable = false, updatable = false)
     private int customerid;
-    @Column
+    @Column(name = "date_ordered")
     private LocalDateTime date_ordered;
-    @Column
+    @Column(name = "total_price")
     private float total_price;
     @ManyToOne
     @JoinColumn(name = "paymentmethodid")
@@ -29,6 +29,4 @@ public class CustomerOrder {
     @ManyToOne
     @JoinColumn(name = "customerid")
     private Customer customer;
-    @OneToMany(mappedBy = "customerOrder")
-    private Set<CustomerOrderProductBridge> customerOrderProductBridgeSet;
 }

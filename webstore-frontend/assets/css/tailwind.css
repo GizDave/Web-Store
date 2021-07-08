@@ -32,3 +32,16 @@
 
 @tailwind utilities;
 
+.btn-enabled {
+  @apply px-4 py-2 opacity-100;
+}
+
+.btn-enabled:hover {
+  @apply bg-none;
+}
+
+.btn-disabled {
+  @apply px-4 py-2 opacity-50 pointer-events-none;
+}
+
+

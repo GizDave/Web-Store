@@ -1,10 +1,9 @@
-package main.java.com.sg.mthree.webstore.model.dto;
+package com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -12,17 +11,16 @@ import java.util.Set;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "addressid")
     private int addressid;
-    @Column
+    @Column(name = "street")
     private String street;
-    @Column
+    @Column(name = "city")
     private String city;
-    @Column
+    @Column(name = "state")
     private String state;
-    @Column
+    @Column(name = "zipcode")
     private String zipcode;
-    @Column
+    @Column(name = "country")
     private String country;
-    @OneToMany(mappedBy = "address")
-    private Set<CustomerAddressBridge> customerAddressBridgeSet;
 }

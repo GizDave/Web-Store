@@ -1,20 +1,22 @@
-package main.java.com.sg.mthree.webstore.model.dao;
+package com.sg.mthree.webstore.model.dao;
 
-import main.java.com.sg.mthree.webstore.model.dto.Product;
+import com.sg.mthree.webstore.model.dto.Category;
+import com.sg.mthree.webstore.model.dto.Product;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<Product,Integer> {
-    // get popular products by number of units ordered (not the best metric)
-    @Query(value = "SELECT p FROM Product p WHERE p.productid IN (SELECT productid FROM Customer_Order_Product_Bridge GROUP BY productid SORT BY SUM(quantity) DESC LIMIT ?1)", nativeQuery = true)
-    List<Product> findByPopularity(int num_product);
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+    @Query("SELECT p FROM Products p")
+    List<Product> findAll();
 
-    @Query(value = "SELECT p FROM Product p WHERE p.name LIKE ?1%", nativeQuery = true)
+    @Query(value = "SELECT p FROM Products p WHERE p.name LIKE ?1%", nativeQuery = true)
     List<Product> findByName(String query);
 
-    @Query("SELECT p FROM Product p WHERE p.categoryid = ?1")
-    List<Product> findByCategoryId(int categoryId, Sort sort);
+    @Query("SELECT p FROM Products p WHERE p.categoryid = ?1")
+    List<Product> findByCategoryId(int categoryId);
 }

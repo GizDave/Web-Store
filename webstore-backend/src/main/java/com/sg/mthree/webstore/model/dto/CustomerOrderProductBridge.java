@@ -1,4 +1,4 @@
-package main.java.com.sg.mthree.webstore.model.dto;
+package com.sg.mthree.webstore.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,14 +9,15 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity(name = "Customer_Order_Product_Bridge")
+@IdClass(CustomerOrderProductBridgeId.class)
 public class CustomerOrderProductBridge implements Serializable {
     @Id
-    @Column
+    @Column(name = "orderid", insertable = false, updatable = false)
     private int orderid;
     @Id
-    @Column
+    @Column(name = "productid", insertable = false, updatable = false)
     private int productid;
-    @Column
+    @Column(name = "quantity")
     private int quantity;
     @ManyToOne
     @JoinColumn(name = "orderid")
