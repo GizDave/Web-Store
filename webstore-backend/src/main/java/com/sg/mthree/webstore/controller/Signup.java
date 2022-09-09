@@ -36,11 +36,6 @@ public class Signup {
                         .body(String.format("Username (after trimming spaces) must be within the length of %d and %d, inclusively.",
                                 min_username_len, max_username_len));
             }
-            if(password.length() < min_password_len || password.length() > max_password_len) {
-                return ResponseEntity.badRequest()
-                        .body(String.format("Password (after trimming spaces) must be within the length of %d and %d, inclusively.",
-                                min_password_len, max_password_len));
-            }
 
             User u = new User();
             u.setUsername(username);
